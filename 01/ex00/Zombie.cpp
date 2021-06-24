@@ -8,17 +8,16 @@ std::string Zombie::target[3] = {"yoU", "braIn", "mEat"};
 
 Zombie::Zombie() {}
 
-Zombie::Zombie(std::string type, std::string name): type(type), name(name) {}
+Zombie::Zombie(std::string name): name(name) {}
 
 Zombie::~Zombie()
 {
 	std::cout << "The head of " << name << " exploded !" << std::endl;
 }
 
-void Zombie::advert()
+void Zombie::announce()
 {
-	std::cout << "<" << name << " (" << type;
-	std::cout << ")> Braiiiiinnnssss ..." << std::endl;
+	std::cout << "<" << name << "> Braiiiiinnnssss ..." << std::endl;
 }
 
 static std::string replaceAndRepeat(std::string target_string)
@@ -36,11 +35,11 @@ static std::string replaceAndRepeat(std::string target_string)
 		return (target_string);
 }
 
-void Zombie::announce()
+void Zombie::tease()
 {
 	int choice;
 
-	std::cout << "<" << name << " (" << type << ")> ";
+	std::cout << "<" << name << "> ";
 	choice = rand() % 3;
 	if (choice < 2)
 		std::cout << Zombie::subjects[choice] << " ";
@@ -51,4 +50,16 @@ void Zombie::announce()
 	choice = rand() % 3;
 	std::cout << replaceAndRepeat(Zombie::target[choice]);
 	std::cout << " !" << std::endl;
+}
+
+Zombie	*newZombie(std::string name)
+{
+	return new Zombie(name);
+}
+
+void	randomChump(std::string name)
+{
+	Zombie	z(name);
+
+	z.announce();
 }

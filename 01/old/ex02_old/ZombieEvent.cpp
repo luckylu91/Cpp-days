@@ -33,6 +33,6 @@ Zombie * ZombieEvent::randomChump()
 		name.append(syll);
 	}
 	Zombie * newcommer = new Zombie(this->type, name);
-	newcommer->announce();
+	newcommer->tease();
 	return newcommer;
 }

@@ -1,33 +1,22 @@
-#include "Zombie.hpp"
-#include "ZombieHorde.hpp"
-#include <iostream>
-#include <cstdlib>
+#include "Weapon.hpp"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
-int main(int argc, char **argv)
+int main()
 {
-	int n;
-
-	if (argc < 2)
 	{
-		std::cout << "Usage ./\"exec_name\" [num_of_zombies=5]" << std::endl;
-		n = 5;
+		Weapon club = Weapon("crude spiked club");
+		HumanA bob("Bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
 	}
-	else if (std::string(argv[1]).find_first_not_of("0123456789")
-		== std::string::npos)
 	{
-		n = atoi(argv[1]);
+		Weapon club = Weapon("crude spiked club");
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("some other type of club");
+		jim.attack();
 	}
-	else
-	{
-		std::cout << "First argument was not a positive ";
-		std::cout << "integer (+ is not tolerated)" << std::endl;
-		std::cout << "Usage ./\"exec_name\" [num_of_zombies=5]" << std::endl;
-		return (1);
-	}
-	ZombieHorde zh(n);
-	std::cout << "A horde of size " << n << " was created :" << std::endl;
-	zh.announce();
-	std::cout << std::endl;
-	std::cout << "End of program" << std::endl;
-	return (0);
 }

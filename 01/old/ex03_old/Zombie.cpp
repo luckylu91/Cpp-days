@@ -15,7 +15,7 @@ Zombie::~Zombie()
 	std::cout << "The head of " << name << " exploded !" << std::endl;
 }
 
-void Zombie::advert()
+void Zombie::announce()
 {
 	std::cout << "<" << name << " (" << type;
 	std::cout << ")> Braiiiiinnnssss ..." << std::endl;
@@ -36,7 +36,7 @@ static std::string replaceAndRepeat(std::string target_string)
 		return (target_string);
 }
 
-void Zombie::announce()
+void Zombie::tease()
 {
 	int choice;
 

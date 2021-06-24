@@ -12,6 +12,6 @@ public:
 	Zombie();
 	Zombie(std::string type, std::string name);
 	~Zombie();
-	void advert();
 	void announce();
+	void tease();
 };

@@ -41,5 +41,5 @@ ZombieHorde::~ZombieHorde()
 void ZombieHorde::announce()
 {
 	for (int i = 0; i < n; i++)
-		horde[i].announce();
+		horde[i].tease();
 }
