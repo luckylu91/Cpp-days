@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 
-int main(int argc, char **argv)
+int main()
 {
 	std::cout << "A horde of size 8 zombies all named octave will be created :" << std::endl;
 	ZombieHorde zh(8, "Octave");
