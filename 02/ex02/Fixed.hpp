@@ -19,17 +19,26 @@ public:
 	float toFloat( void ) const;
 	int getBinaryPointPosition( void ) const;
 
-	//TODO
 	bool operator>(Fixed const &) const;
 	bool operator<(Fixed const &) const;
 	bool operator>=(Fixed const &) const;
 	bool operator<=(Fixed const &) const;
 	bool operator==(Fixed const &) const;
 	bool operator!=(Fixed const &) const;
+
 	Fixed operator+(Fixed const &) const;
 	Fixed operator-(Fixed const &) const;
 	Fixed operator/(Fixed const &) const;
 	Fixed operator*(Fixed const &) const;
-	//TODO
+
+	Fixed & operator++();
+	Fixed operator++(int);
+	Fixed & operator--();
+	Fixed operator--(int);
+
+	static Fixed & min(Fixed &, Fixed &);
+	static Fixed const & min(Fixed const &, Fixed const &);
+	static Fixed & max(Fixed &, Fixed &);
+	static Fixed const & max(Fixed const &, Fixed const &);
 };
 std::ostream & operator<<(std::ostream & os, Fixed const & fix);
