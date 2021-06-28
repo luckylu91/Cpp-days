@@ -46,7 +46,16 @@
 	},
 	"cout": {
 		"prefix": "cout",
-		"body": "std::cout"
+		"body": "std::cout << $0"
+	},
+	"cout endl": {
+		"prefix": "cendl",
+		"body": "std::cout << $0 << std::endl;"
+	},
+	"insert cout string":
+	{
+		"prefix": "icoutstring",
+		"body": " << $0 << "
 	},
 	"pragma once": {
 		"prefix": "pragma",

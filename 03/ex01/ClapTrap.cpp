@@ -18,7 +18,7 @@ void ClapTrap::attack(std::string const & target)
 	if (energyPoints < 10)
 	{
 		std::cout << name << " hasn't enough energy points left to attack (";
-		std::cout << energyPoints << " energy points remaining)" << std::endl;
+		std::cout << energyPoints << " energy points remaining, 10 needed)" << std::endl;
 		return ;
 	}
 	energyPoints -= 10;

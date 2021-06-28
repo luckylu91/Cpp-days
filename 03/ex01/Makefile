@@ -1,8 +1,8 @@
 CC =	clang++
 CFLAGS = -Wall -Wextra -Werror
 NAME =	prog
-SRCS =	main.cpp ClapTrap.cpp
-INC =	ClapTrap.hpp
+SRCS =	main.cpp ClapTrap.cpp ScavTrap.cpp
+INC =	ClapTrap.hpp ScavTrap.hpp
 
 all:	$(NAME)
 
