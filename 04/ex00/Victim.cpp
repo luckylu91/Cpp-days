@@ -2,14 +2,24 @@
 #include <string>
 #include <iostream>
 
-Victim::Victim(std::string name)
+void Victim::init()
 {
 	std::cout << "Some random victim called " << name << " just appeared!" << std::endl;
 }
 
+Victim::Victim(std::string name) : name(name) { init(); }
+
+Victim::Victim(Victim const & other) : name(other.name) { init(); }
+
 Victim::~Victim()
 {
 	std::cout << "Victim " << name << " just died for no apparent reason!" << std::endl;
+}
+
+Victim & Victim::operator=(Victim const & other)
+{
+	name = other.name;
+	return *this;
 }
 
 std::string Victim::getName() const
@@ -17,10 +27,10 @@ std::string Victim::getName() const
 	return name;
 }
 
-
-std::ostream & operator<<(std::ostream const & os, Victim const & victim)
+std::ostream & operator<<(std::ostream & os, Victim const & victim)
 {
-	std::cout << "I'm " << victim.getName() << " and I like otters!" << std::endl;
+	os << "I'm " << victim.getName() << " and I like otters!" << std::endl;
+	return os;
 }
 
 void Victim::getPolymorphed() const

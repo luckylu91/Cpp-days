@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include "Victim.hpp"
 
 class Sorcerer
 {
@@ -18,4 +19,4 @@ public:
 	void polymorph(Victim const &) const;
 };
 
-std::ostream & operator<<(std::ostream const & os, Sorcerer const & sorcerer);
+std::ostream & operator<<(std::ostream & os, Sorcerer const & sorcerer);

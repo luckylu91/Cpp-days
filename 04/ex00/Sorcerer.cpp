@@ -31,11 +31,13 @@ Sorcerer & Sorcerer::operator=(Sorcerer const & other)
 {
 	name = other.name;
 	title = other.title;
+	return *this;
 }
 
-std::ostream & operator<<(std::ostream const & os, Sorcerer const & sorcerer)
+std::ostream & operator<<(std::ostream & os, Sorcerer const & sorcerer)
 {
-	std::cout << "I am " << sorcerer.getName() << ", " << sorcerer.getTitle() << ", and I like ponies!" << std::endl;
+	os << "I am " << sorcerer.getName() << ", " << sorcerer.getTitle() << ", and I like ponies!" << std::endl;
+	return os;
 }
 
 void Sorcerer::polymorph(Victim const & victim) const
