@@ -11,5 +11,5 @@ public:
 	Peon(Peon const &);
 	~Peon();
 	Peon & operator=(Peon const &);
-	virtual void getPolymorphed() const;
+	void getPolymorphed() const;
 };

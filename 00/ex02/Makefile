@@ -1,6 +1,6 @@
-NAME = contacts
-SRCS = main.cpp Contact.cpp
-HEADERS = Contact.hpp
+NAME = prog
+SRCS = tests.cpp Account.cpp
+HEADERS = Account.hpp
 
 all:	$(NAME)
 

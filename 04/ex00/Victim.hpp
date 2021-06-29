@@ -4,13 +4,13 @@
 class Victim
 {
 private:
-void init();
+	void init();
 protected:
 	std::string name;
 public:
 	Victim(std::string name);
 	Victim(Victim const &);
-	~Victim();
+	virtual ~Victim();
 	Victim & operator=(Victim const &);
 	std::string getName() const;
 	virtual void getPolymorphed() const;
