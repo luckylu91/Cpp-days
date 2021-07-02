@@ -21,7 +21,7 @@ std::string const & Character::getName() const
 
 bool Character::hasWeapon() const
 {
-	return (weapon != nullptr);
+	return (weapon != NULL);
 }
 
 std::string Character::getWeaponName() const
