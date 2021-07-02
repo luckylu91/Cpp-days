@@ -1,8 +1,8 @@
 CC =	clang++
 CFLAGS = -Wall -Wextra -Werror
 NAME =	prog
-SRCS =	main.cpp AssaultTerminator.cpp Squad.cpp TacticalMarine.cpp
-INC =	AssaultTerminator.hpp ISpaceMarine.hpp ISquad.hpp Squad.hpp TacticalMarine.hpp
+SRCS =	main.cpp Squad.cpp TacticalMarine.cpp AssaultTerminator.cpp
+INC = Squad.hpp TacticalMarine.hpp AssaultTerminator.hpp ISpaceMarine.hpp ISquad.hpp
 
 all:	$(NAME)
 

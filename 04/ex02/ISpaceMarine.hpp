@@ -8,3 +8,5 @@ public:
 	virtual void rangedAttack() const = 0;
 	virtual void meleeAttack() const = 0;
 };
+
+

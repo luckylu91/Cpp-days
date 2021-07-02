@@ -1,14 +1,16 @@
 #pragma once
-#include "ISquad.hpp"
+#include <iostream>
 #include "ISpaceMarine.hpp"
-#include <cstddef>
+#include "ISquad.hpp"
 
 class Squad : public ISquad
 {
 private:
-	ISpaceMarine **marines;
-	int n_marines;
-	int size;
+	ISpaceMarine**	marines;
+	int				n_marines;
+	int				size;
+	bool			_is_empty() const;
+	void			_clone(Squad const &);
 public:
 	Squad();
 	Squad(Squad const &);
@@ -18,40 +20,3 @@ public:
 	virtual ISpaceMarine* getUnit(int) const;
 	virtual int push(ISpaceMarine*);
 };
-
-Squad::Squad() : marines(NULL), n_marines(0), size(0) {}
-
-Squad::Squad(Squad const & other)
-{
-}
-
-Squad::~Squad()
-{
-}
-
-Squad & Squad::operator=(Squad const & other)
-{
-	return *this;
-}
-
-int Squad::getCount() const
-{
-	return n_marines;
-}
-
-ISpaceMarine* Squad::getUnit(int i) const
-{
-	if (i >= 0 && i < n_marines)
-		return marines[i];
-	else
-		return NULL;
-}
-
-int Squad::push(ISpaceMarine*)
-{
-	if (n_marines == size && size > 0)
-		delete [] marines;
-	marines = new *
-		
-	n_marines++;
-}
