@@ -38,7 +38,7 @@ int main()
 	}
 	std::cout << std::endl;
 	{
-		DiamondTrap d("François-Le-Diams-Le-Gilbert");
+		DiamondTrap d("François-Le-Diams");
 		d.attack("La mort elle même");
 		d.takeDamage(31);
 		d.beRepaired(4);

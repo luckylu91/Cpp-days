@@ -7,12 +7,19 @@ void ScavTrap::_init()
 	hitPoints = 100;
 	energyPoints = 50;
 	attackDamage = 20;
-	std::cout << "Constructor of ScavTrap" << std::endl;
 }
 
-ScavTrap::ScavTrap() { _init(); }
+ScavTrap::ScavTrap()
+{
+	_init();
+	std::cout << "Default Constructor of ScavTrap" << std::endl;
+}
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) { _init(); }
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+{
+	_init();
+	std::cout << "Constructor of ScavTrap (named " << name << ")" << std::endl;
+}
 
 ScavTrap::~ScavTrap()
 {

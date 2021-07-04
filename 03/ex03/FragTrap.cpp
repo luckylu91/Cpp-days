@@ -8,12 +8,19 @@ void FragTrap::_init()
 	hitPoints = 100;
 	energyPoints = 100;
 	attackDamage = 30;
-	std::cout << "Constructor of FragTrap" << std::endl;
 }
 
-FragTrap::FragTrap() { _init(); }
+FragTrap::FragTrap()
+{
+	_init();
+	std::cout << "Default Constructor of FragTrap" << std::endl;
+}
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name) { _init(); }
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
+{
+	_init();
+	std::cout << "Constructor of FragTrap (named " << name << ")" << std::endl;
+}
 
 FragTrap::~FragTrap()
 {
