@@ -10,14 +10,14 @@ void Karen::debug( void )
 
 void Karen::info( void )
 {
-	std::cout << "I cannot believe adding extrabacon cost more money. " \
+	std::cout << "I cannot believe adding extra bacon cost more money. " \
 		"You don’t put enough! If you did I would not have to askfor it!" << std::endl;
 }
 
 void Karen::warning( void )
 {
 	std::cout << "I think I deserve to have some extra bacon for free. " \
-	"I’ve beencoming here for years and you just started working here last month." << std::endl;
+	"I’ve been coming here for years and you just started working here last month." << std::endl;
 }
 
 void Karen::error( void )

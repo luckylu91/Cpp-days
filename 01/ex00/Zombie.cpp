@@ -6,8 +6,6 @@ std::string Zombie::subjects[2] = {"I", "Me"};
 std::string Zombie::actions[3] = {"eat", "consume", "want"};
 std::string Zombie::target[3] = {"yoU", "braIn", "mEat"};
 
-Zombie::Zombie() {}
-
 Zombie::Zombie(std::string name): name(name) {}
 
 Zombie::~Zombie()
@@ -50,16 +48,4 @@ void Zombie::tease()
 	choice = rand() % 3;
 	std::cout << replaceAndRepeat(Zombie::target[choice]);
 	std::cout << " !" << std::endl;
-}
-
-Zombie	*newZombie(std::string name)
-{
-	return new Zombie(name);
-}
-
-void	randomChump(std::string name)
-{
-	Zombie	z(name);
-
-	z.announce();
 }

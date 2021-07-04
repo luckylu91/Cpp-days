@@ -4,45 +4,45 @@
 
 Fixed::Fixed() : value(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(int const val_int) : value(val_int << Fixed::BINARY_POINT_POSITION)
 {
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(float const val_flt) : value(roundf(val_flt * (1 << Fixed::BINARY_POINT_POSITION)))
 {
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::Fixed(Fixed const & other) : value(other.value)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 Fixed & Fixed::operator=(Fixed const & other)
 {
-	std::cout << "Assignation operator called" << std::endl;
+	// std::cout << "Assignation operator called" << std::endl;
 	value = other.value;
 	return *this;
 }
 
 int Fixed::getRawBits( void ) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return value;
 }
 
 void Fixed::setRawBits( int const raw )
 {
-	std::cout << "setRawBits member function called" << std::endl;
+	// std::cout << "setRawBits member function called" << std::endl;
 	value = raw;
 }
 
@@ -95,12 +95,16 @@ bool Fixed::operator!=(Fixed const & other) const
 
 Fixed Fixed::operator+(Fixed const & other) const
 {
-	return value + other.value;
+	Fixed result;
+	result.setRawBits(value + other.value);
+	return result;
 }
 
 Fixed Fixed::operator-(Fixed const & other) const
 {
-	return value - other.value;
+	Fixed result;
+	result.setRawBits(value - other.value);
+	return result;
 }
 
 Fixed Fixed::operator/(Fixed const & other) const
@@ -108,7 +112,6 @@ Fixed Fixed::operator/(Fixed const & other) const
 	Fixed	res;
 	int		rawBits = (((long)value) << Fixed::BINARY_POINT_POSITION) \
 		/ (long)other.value;
-
 	res.setRawBits(rawBits);
 	return res;
 }
@@ -118,7 +121,6 @@ Fixed Fixed::operator*(Fixed const & other) const
 	Fixed	res;
 	int		rawBits = (((long)value * (long)other.value) \
 		>> Fixed::BINARY_POINT_POSITION);
-
 	res.setRawBits(rawBits);
 	return res;
 }
@@ -181,4 +183,3 @@ Fixed const & Fixed::max(Fixed const & a, Fixed const & b)
 	else
 		return b;
 }
-

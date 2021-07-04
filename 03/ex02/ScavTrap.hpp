@@ -4,6 +4,8 @@
 
 class ScavTrap : public ClapTrap
 {
+protected:
+	ScavTrap();
 public:
 	ScavTrap(std::string name);
 	~ScavTrap();

@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 
+FragTrap::FragTrap() {}
+
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	hitPoints = 100;

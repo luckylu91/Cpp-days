@@ -44,5 +44,6 @@ int main()
 		d.beRepaired(4);
 		d.guardGate();
 		d.highFivesGuys();
+		d.whoAmI();
 	}
 }

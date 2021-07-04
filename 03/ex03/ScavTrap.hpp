@@ -4,6 +4,10 @@
 
 class ScavTrap : virtual public ClapTrap
 {
+private:
+	void _init();
+protected:
+	ScavTrap();
 public:
 	ScavTrap(std::string name);
 	~ScavTrap();

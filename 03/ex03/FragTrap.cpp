@@ -3,13 +3,17 @@
 #include <string>
 #include <iostream>
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name)
+void FragTrap::_init()
 {
 	hitPoints = 100;
 	energyPoints = 100;
 	attackDamage = 30;
-	std::cout << "Constructor of FragTrap (named " << name << ")" << std::endl;
+	std::cout << "Constructor of FragTrap" << std::endl;
 }
+
+FragTrap::FragTrap() { _init(); }
+
+FragTrap::FragTrap(std::string name) : ClapTrap(name) { _init(); }
 
 FragTrap::~FragTrap()
 {

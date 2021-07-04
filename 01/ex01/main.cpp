@@ -6,11 +6,15 @@
 int main()
 {
 	std::cout << "A horde of size 8 zombies all named octave will be created :" << std::endl;
-	ZombieHorde zh(8, "Octave");
+	Zombie* horde = zombieHorde(8, "Octave");
 	std::cout << "Announce :" << std::endl;
-	zh.announce();
+	for (int i = 0; i < 8; i++)
+		horde[i].announce();
 	std::cout << "Tease (pour le fun) :" << std::endl;
-	zh.tease();
-	std::cout << "Deletion is automatic via ZombieHorde's desctuctor" << std::endl;
+	for (int i = 0; i < 8; i++)
+		horde[i].tease();
+	std::cout << "Deletion via delete []..." << std::endl;
+	delete [] horde;
+	std::cout << "...Done !" << std::endl;
 	return (0);
 }

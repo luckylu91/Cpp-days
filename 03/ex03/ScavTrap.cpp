@@ -2,13 +2,17 @@
 #include <iostream>
 #include <string>
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+void ScavTrap::_init()
 {
 	hitPoints = 100;
 	energyPoints = 50;
 	attackDamage = 20;
-	std::cout << "Constructor of ScavTrap (named " << name << ")" << std::endl;
+	std::cout << "Constructor of ScavTrap" << std::endl;
 }
+
+ScavTrap::ScavTrap() { _init(); }
+
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name) { _init(); }
 
 ScavTrap::~ScavTrap()
 {

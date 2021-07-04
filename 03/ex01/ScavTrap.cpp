@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+ScavTrap::ScavTrap() {}
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	hitPoints = 100;

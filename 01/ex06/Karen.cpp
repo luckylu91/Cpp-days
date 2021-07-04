@@ -46,12 +46,6 @@ void Karen::complain_starting_at( std::string level )
 		"WARNING",
 		"ERROR"
 	};
-	static complaint_fun_t levels_methods[] = {
-		&Karen::debug,
-		&Karen::info,
-		&Karen::warning,
-		&Karen::error
-	};
 	int	i;
 
 	for (i = 0; i < 4; i++)
@@ -61,8 +55,15 @@ void Karen::complain_starting_at( std::string level )
 	}
 	if (i == 4)
 		unknown();
-	for (; i < 4; i++)
+	switch (i)
 	{
-		(this->*(levels_methods[i]))();
+		case 0:
+			debug();
+		case 1:
+			info();
+		case 2:
+			warning();
+		case 3:
+			error();
 	}
 }

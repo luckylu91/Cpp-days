@@ -1,7 +1,7 @@
 CC =	clang++
 CFLAGS = -Wall -Wextra -Werror
 NAME =	prog
-SRCS =	main.cpp Zombie.cpp
+SRCS =	main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 INC =	Zombie.hpp
 
 all:	$(NAME)

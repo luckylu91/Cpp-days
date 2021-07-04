@@ -15,6 +15,11 @@ Zombie::~Zombie()
 	std::cout << "The head of " << name << " exploded !" << std::endl;
 }
 
+void Zombie::setName(std::string const & name)
+{
+	this->name = name;
+}
+
 void Zombie::announce()
 {
 	std::cout << "<" << name << "> Braiiiiinnnssss ..." << std::endl;
@@ -50,16 +55,4 @@ void Zombie::tease()
 	choice = rand() % 3;
 	std::cout << replaceAndRepeat(Zombie::target[choice]);
 	std::cout << " !" << std::endl;
-}
-
-Zombie	*newZombie(std::string name)
-{
-	return new Zombie(name);
-}
-
-void	randomChump(std::string name)
-{
-	Zombie	z(name);
-
-	z.announce();
 }
