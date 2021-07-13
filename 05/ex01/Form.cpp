@@ -5,17 +5,17 @@ std::string	Form::_exceptionMessage(std::string fieldName, bool low) const
 	std::stringstream ss;
 
 	ss << "The given grade for the field '" << fieldName << "' is too ";
-	ss << low ? "low" : "high";
+	ss << (low ? "low" : "high");
 	return ss.str();
 }
 
-std::string	Form::_exceptionMessage(Bureaucrat & b) const
+std::string	Form::_exceptionMessage(Bureaucrat const & b) const
 {
 	std::stringstream ss;
 
 	ss << "The bureaucrat named " << b.getName();
 	ss << " has a grade too low to sign this form ";
-	ss << "bureaucrat: " << b.getGrade();
+	ss << "(bureaucrat'grade : " << b.getGrade();
 	ss << ", form requires: " << requireSign << ")";
 	return ss.str();
 }
@@ -29,8 +29,8 @@ Form::GradeTooLowException::GradeTooLowException(std::string message): _msg(mess
 const char * Form::GradeTooLowException::what() const throw() { return _msg.c_str(); }
 
 
-Form::Form(std::string name, int rSign, int rExecute) : name(name),
-	isSigned(false), requireSign(rSign), requireExecute(rExecute)
+Form::Form(std::string name, int rSign, int rExecute) : isSigned(false),
+	name(name), requireSign(rSign), requireExecute(rExecute)
 {
 	if (rSign < 1)
 		throw (GradeTooHighException(_exceptionMessage("requireSign", false)));
@@ -42,7 +42,7 @@ Form::Form(std::string name, int rSign, int rExecute) : name(name),
 		throw (GradeTooLowException(_exceptionMessage("requireExecute", true)));
 }
 
-Form::Form(Form const & other) : name(other.name), isSigned(other.isSigned),
+Form::Form(Form const & other) : isSigned(other.isSigned), name(other.name),
 	requireSign(other.requireSign), requireExecute(other.requireExecute) {}
 
 Form::~Form() {}
@@ -62,18 +62,27 @@ int Form::getRequireExecute() const
 	return requireExecute;
 }
 
-std::ostream & operator<< (std::ostream & os, Form & form)
+bool Form::getIsSigned() const
 {
-	std::cout << "Form '" << form.getName();
-	std::cout << "' (required sign : " << form.getRequireSign();
-	std::cout << ", required execute : " << form.getRequireExecute();
-	std::cout << ")" << std::endl;
+	return isSigned;
 }
 
-void Form::beSigned(Bureaucrat & b) throw(Form::GradeTooLowException)
+std::ostream & operator<< (std::ostream & os, Form const & form)
+{
+	os << "Form '" << form.getName();
+	os << "' (required sign : " << form.getRequireSign();
+	os << ", required execute : " << form.getRequireExecute();
+	os << ") : ";
+	os << (form.getIsSigned() ? "signed" : "not signed yet");
+	return os;
+}
+
+void Form::beSigned(Bureaucrat const & b) throw(Form::GradeTooLowException)
 {
 	if (b.getGrade() <= requireSign)
+	{
 		isSigned = true;
+	}
 	else
 		throw Form::GradeTooLowException(_exceptionMessage(b));
 }

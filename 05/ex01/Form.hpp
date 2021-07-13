@@ -13,8 +13,9 @@ private:
 	int const			requireExecute;
 
 	std::string	_exceptionMessage(std::string fieldName, bool low) const;
-	std::string	_exceptionMessage(Bureaucrat & b) const;
+	std::string	_exceptionMessage(Bureaucrat const & b) const;
 
+public:
 	class GradeTooHighException : public std::exception
 	{
 	public:
@@ -33,7 +34,6 @@ private:
 		std::string _msg;
 	};
 
-public:
 	Form(std::string name, int rSign, int rExecute);
 	Form(Form const &);
 	~Form();
@@ -41,6 +41,8 @@ public:
 	std::string const & getName() const;
 	int getRequireSign() const;
 	int getRequireExecute() const;
-	void beSigned(Bureaucrat & b) throw(Form::GradeTooLowException);
+	bool getIsSigned() const;
+	void beSigned(Bureaucrat const & b) throw(Form::GradeTooLowException);
 };
 
+std::ostream & operator<<(std::ostream & os, Form const & f);

@@ -22,16 +22,21 @@ int main()
 	createBureaucrat("b1", 0);
 	createBureaucrat("b2", 155);
 	createBureaucrat("b3", 75);
-	
-	Bureaucrat b("Hermes Conrad", 149);
 
-	std::cout << b << " is gaining grades too fast !" << std::endl;
-	while (1)
+	Bureaucrat b("Hermes Conrad", 5);
+
+	try
 	{
-		for (int i = 0; i < 10; i++)
+		std::cout << b << " is gaining grades too fast !" << std::endl;
+		while (1)
 		{
+			std::cout << "Promoting " << b << "..." << std::endl;
 			++b;
+			std::cout << b << std::endl;
 		}
-		std::cout << b << std::endl;
+	}
+	catch (Bureaucrat::GradeTooHighException & e)
+	{
+		std::cout << "Stop this nonsense : " << e.what() << std::endl;
 	}
 }

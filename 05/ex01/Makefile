@@ -1,8 +1,8 @@
 CC =	clang++
 CFLAGS = -Wall -Wextra -Werror
 NAME =	prog
-SRCS =	main.cpp Bureaucrat.cpp
-INC =	Bureaucrat.hpp
+SRCS =	main.cpp Bureaucrat.cpp Form.cpp
+INC =	Bureaucrat.hpp Form.hpp
 
 all:	$(NAME)
 

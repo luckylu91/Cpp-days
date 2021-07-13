@@ -9,6 +9,7 @@ private:
 	std::string	name;
 	int			grade;
 
+public:
 	struct GradeTooHighException : public std::exception
 	{
 		virtual const char * what() const throw();
@@ -19,7 +20,6 @@ private:
 		virtual const char * what() const throw();
 	};
 
-public:
 	Bureaucrat(std::string name, int grade) throw(GradeTooLowException, GradeTooHighException);
 	Bureaucrat(Bureaucrat const &);
 	~Bureaucrat();
@@ -30,4 +30,4 @@ public:
 	Bureaucrat & operator--();
 };
 
-std::ostream & operator<<(std::ostream & os, Bureaucrat & b);
+std::ostream & operator<<(std::ostream & os, Bureaucrat const & b);
