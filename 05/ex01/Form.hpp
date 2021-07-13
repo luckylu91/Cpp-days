@@ -2,6 +2,7 @@
 #include "Bureaucrat.hpp"
 #include <string>
 #include <exception>
+#include <iostream>
 
 class Form
 {
@@ -11,80 +12,35 @@ private:
 	int const			requireSign;
 	int const			requireExecute;
 
-	struct GradeTooHighException : public std::exception
+	std::string	_exceptionMessage(std::string fieldName, bool low) const;
+	std::string	_exceptionMessage(Bureaucrat & b) const;
+
+	class GradeTooHighException : public std::exception
 	{
+	public:
+		GradeTooHighException(std::string message);
 		virtual const char * what() const throw();
+	protected:
+		std::string _msg;
 	};
 
-	struct GradeTooLowException : public std::exception
+	class GradeTooLowException : public std::exception
 	{
+	public:
+		GradeTooLowException(std::string message);
 		virtual const char * what() const throw();
+	protected:
+		std::string _msg;
 	};
 
 public:
 	Form(std::string name, int rSign, int rExecute);
 	Form(Form const &);
 	~Form();
-	Form & operator=(Form const &);
+	// cant have assignation operator because some members are const
 	std::string const & getName() const;
 	int getRequireSign() const;
 	int getRequireExecute() const;
-	void beSigned(Bureaucrat & b);
+	void beSigned(Bureaucrat & b) throw(Form::GradeTooLowException);
 };
 
-Form::Form(std::string name, int rSign, int rExecute)
-	: name(name), isSigned(false)
-{
-	if (rSign < 1)
-		throw (GradeTooHighException());
-	if (rSign > 150)
-		throw (GradeTooLowException());
-	if (rExecute < 1)
-		throw (GradeTooHighException());
-	if (rExecute > 150)
-		throw (GradeTooLowException());
-	requireSign = rSign;
-	requireExecute = rExecute;
-}
-
-Form::Form(Form const & other) : name(other.name), isSigned(other.isSigned),
-	requireSign(other.requireSign), requireExecute(other.requireExecute) {}
-
-Form::~Form() {}
-
-Form & Form::operator=(Form const & other)
-{
-	name = other.name;
-	requireSign = other.requireSign;
-	requireExecute = other.requireExecute;
-	return *this;
-}
-
-std::string const & Form::getName() const
-{
-	return name;
-}
-
-int Form::getRequireSign() const
-{
-	return requireSign;
-}
-
-int Form::getRequireExecute() const
-{
-	return requireExecute;
-}
-
-std::ostream & operator<< (std::ostream & os, Form & form)
-{
-	std::cout << "Form '" << name << "' (required sign : " << form.getRequireSign();
-	std::cout << ", required execute : " << form.getRequireExecute() << ")" << std::endl;
-}
-
-void Form::beSigned(Bureaucrat & b)
-{
-	if (b.getGrade() <= requireSign)
-		isSigned = true;
-	else
-		.....
-}
