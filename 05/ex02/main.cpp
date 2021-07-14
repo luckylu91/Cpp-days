@@ -8,49 +8,64 @@
 
 static void createBureaucrat(std::string name, int grade) throw ()
 {
+	static const std::string red("\033[0;31m");
+	static const std::string green("\033[0;32m");
+	static const std::string reset("\033[0m");
+
 	std::cout << "Trying to create a bureaucrate named " << name << " and grade " << grade << std::endl;
 	try
 	{
 		Bureaucrat b(name, grade);
-		std::cout << "Success !" << std::endl;
+		std::cout << green << "Success !" << reset << std::endl;
 	}
 	catch (std::exception & e)
 	{
-		std::cout << "Failure !" << std::endl;
+		std::cout << red << "Failure !" << reset << std::endl;
 		std::cout << "The problem was : " << e.what() << std::endl;
 	}
 }
 
 static void createForm(std::string name, int rSign, int rExecute) throw ()
 {
+
+	static const std::string red("\033[0;31m");
+	static const std::string green("\033[0;32m");
+	static const std::string reset("\033[0m");
+
 	std::cout << "Trying to create a form named " << name;
 	std::cout << ", requiresign = " << rSign;
 	std::cout << ", requireExecute = " << rExecute << std::endl;
 	try
 	{
 		Form f(name, rSign, rExecute);
-		std::cout << "Success ! " << f << std::endl;
+		std::cout << green << "Success !" << reset << std::endl;
 	}
 	catch (std::exception & e)
 	{
-		std::cout << "Failure !" << std::endl;
+		std::cout << red << "Failure !" << reset << std::endl;
 		std::cout << "The problem was : " << e.what() << std::endl;
 	}
 }
 
 static void trySign(Bureaucrat const & b, Form & f)
 {
+
+	static const std::string red("\033[0;31m");
+	static const std::string green("\033[0;32m");
+	static const std::string reset("\033[0m");
+
 	std::cout << "Trying to make " << b << " sign <" << f << ">" << std::endl;
 	try
 	{
 		f.beSigned(b);
-		std::cout << "Success ! Bureaucrat " << b.getName();
+		std::cout << green << "Success !" << reset;
+		std::cout << " Bureaucrat " << b.getName();
 		std::cout << " managed to sign form '" << f.getName();
 		std::cout << "'" << std::endl;
 	}
 	catch(const Form::GradeTooLowException & e)
 	{
-		std::cout << "Failure !" << std::endl;
+		std::cout << red << "Failure !" << reset << std::endl;
 		std::cout << "The problem was : " << e.what() << std::endl;
 	}
 }
@@ -106,15 +121,7 @@ int main()
 		Bureaucrat intern("Billy", 150);
 
 		intern.executeForm(shForm);
-		intern.executeForm(presForm);
-		intern.executeForm(robForm);
-		std::cout << std::endl;
-
-		boss.executeForm(shForm);
-		boss.executeForm(presForm);
 		boss.executeForm(robForm);
-		std::cout << std::endl;
-
 		shForm.beSigned(boss);
 		presForm.beSigned(boss);
 		robForm.beSigned(boss);

@@ -68,15 +68,20 @@ Bureaucrat & Bureaucrat::operator--()
 
 void Bureaucrat::executeForm(Form const & form) const
 {
+	static const std::string red("\033[0;31m");
+	static const std::string green("\033[0;32m");
+	static const std::string reset("\033[0m");
+
 	std::cout << "Trying to make " << *this << " sign <" << form << ">" << std::endl;
 	try
 	{
 		form.execute(*this);
+		std::cout << green << "Succes ! " << reset;
 		std::cout << name << " executes " << form.getName() << std::endl;
 	}
 	catch (std::exception const & e)
 	{
-		std::cout << "Failure !" << std::endl;
+		std::cout << red << "Failure !" << reset << std::endl;
 		std::cout << "The problem was : " << e.what() << std::endl;
 	}
 }

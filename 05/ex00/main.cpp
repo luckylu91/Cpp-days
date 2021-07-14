@@ -4,15 +4,19 @@
 
 static void createBureaucrat(std::string name, int grade) throw ()
 {
+	static const std::string red("\033[0;31m");
+	static const std::string green("\033[0;32m");
+	static const std::string reset("\033[0m");
+
 	std::cout << "Trying to create a bureaucrate named " << name << " and grade " << grade << std::endl;
 	try
 	{
 		Bureaucrat b(name, grade);
-		std::cout << "Success !" << std::endl;
+		std::cout << green << "Success !" << reset << std::endl;
 	}
 	catch (std::exception & e)
 	{
-		std::cout << "Failure !" << std::endl;
+		std::cout << red << "Failure !" << reset << std::endl;
 		std::cout << "The problem was : " << e.what() << std::endl;
 	}
 }
