@@ -66,3 +66,17 @@ Bureaucrat & Bureaucrat::operator--()
 	return (*this);
 }
 
+void Bureaucrat::executeForm(Form const & form) const
+{
+	std::cout << "Trying to make " << *this << " sign <" << form << ">" << std::endl;
+	try
+	{
+		form.execute(*this);
+		std::cout << name << " executes " << form.getName() << std::endl;
+	}
+	catch (std::exception const & e)
+	{
+		std::cout << "Failure !" << std::endl;
+		std::cout << "The problem was : " << e.what() << std::endl;
+	}
+}

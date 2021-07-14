@@ -55,20 +55,6 @@ static void trySign(Bureaucrat const & b, Form & f)
 	}
 }
 
-static void tryExecute(Bureaucrat const & b, Form & f)
-{
-	std::cout << "Trying to make " << b << " sign <" << f << ">" << std::endl;
-	try
-	{
-		f.execute(b);
-	}
-	catch(const std::exception & e)
-	{
-		std::cout << "Failure !" << std::endl;
-		std::cout << "The problem was : " << e.what() << std::endl;
-	}
-}
-
 int main()
 {
 	{
@@ -119,19 +105,21 @@ int main()
 		Bureaucrat boss("Boss", 1);
 		Bureaucrat intern("Billy", 150);
 
-		tryExecute(intern, shForm);
-		tryExecute(intern, presForm);
-		tryExecute(intern, robForm);
+		intern.executeForm(shForm);
+		intern.executeForm(presForm);
+		intern.executeForm(robForm);
 		std::cout << std::endl;
-		tryExecute(boss, shForm);
-		tryExecute(boss, presForm);
-		tryExecute(boss, robForm);
+
+		boss.executeForm(shForm);
+		boss.executeForm(presForm);
+		boss.executeForm(robForm);
 		std::cout << std::endl;
+
 		shForm.beSigned(boss);
 		presForm.beSigned(boss);
 		robForm.beSigned(boss);
-		tryExecute(boss, shForm);
-		tryExecute(boss, presForm);
-		tryExecute(boss, robForm);
+		boss.executeForm(shForm);
+		boss.executeForm(presForm);
+		boss.executeForm(robForm);
 	}
 }

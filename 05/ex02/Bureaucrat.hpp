@@ -2,6 +2,7 @@
 #include <string>
 #include <exception>
 #include <sstream>
+#include "Form.hpp"
 
 class Bureaucrat
 {
@@ -28,6 +29,7 @@ public:
 	int getGrade() const;
 	Bureaucrat & operator++();
 	Bureaucrat & operator--();
+	void executeForm(Form const & form) const;
 };
 
 std::ostream & operator<<(std::ostream & os, Bureaucrat const & b);
