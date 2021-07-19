@@ -1,7 +1,9 @@
 #include <iostream>
 #include <sstream>
 #include <cstring>
+#include <limits>
 #include <cmath>
+#include <iomanip>
 
 void printUsage()
 {
@@ -12,17 +14,14 @@ void printUsage()
 class Converter
 {
 private:
-	bool		intitialized;
 	typedef enum e_type_from {CHAR, INT, FLOAT, DOUBLE, UNKNOWN} t_type_from;
+	bool		intitialized;
+	bool		intConvertible;
 	char 		c;
 	int 		i;
 	float 		f;
 	double 		d;
 	t_type_from	t;
-	bool		charConvertible;
-	bool		intConvertible;
-	bool		floatConvertible;
-	bool		doubleConvertible;
 	static char const *consumeMinus(char const *s);
 	static char const *consumeInt(char const *s);
 	static char const *consumeDouble(char const *s);
@@ -43,13 +42,14 @@ Converter::Converter() : intitialized(false) {}
 
 Converter::~Converter() {}
 
-Converter::Converter(Converter const & other) : intitialized(other.intitialized),
+Converter::Converter(Converter const & other) : intitialized(other.intitialized), intConvertible(other.intConvertible),
 	c(other.c), i(other.i), f(other.f), d(other.d), t(other.t) {}
 
 // Converter & Converter::operator=(Converter const & other) {}
 
 Converter & Converter::fromString(std::string const & str)
 {
+	this->intConvertible = true;
 	if (!(fromChar(str) || fromInt(str) || fromFloat(str) || fromDouble(str)))
 		this->t = UNKNOWN;
 	return *this;
@@ -99,60 +99,92 @@ bool Converter::fromInt(std::string const & str)
 
 bool Converter::fromFloat(std::string const & str)
 {
-	char const *s = str.c_str();
 	static char const *constants[3] = {
 		"-inff", "+inff", "nanf"
 	};
+	static double const values[3] = {
+		std::numeric_limits<float>::min(),
+		std::numeric_limits<float>::max(),
+		nanf("")
+	};
+	bool isFloat = false;
 
 	for (int i = 0; i < 3; i++)
 	{
-		if (std::strcmp(s, constants[i]) == 0)
-			return true;
+		if (str == constants[i])
+		{
+			this->f = values[i];
+			isFloat = true;
+			intConvertible = false;
+		}
 	}
-	s = consumeDouble(s);
-	if (std::strcmp(s, "f") == 0)
+	if (!isFloat)
+	{
+		char const *s = str.c_str();
+		s = consumeDouble(s);
+		if (std::strcmp(s, "f") == 0)
+		{
+			isFloat = true;
+			std::stringstream ss(str);
+			ss >> this->f;
+			/// marche pas
+		}
+	}
+	if (isFloat)
 	{
 		this->t = FLOAT;
-		std::stringstream ss(str);
-		ss >> this->f;
 		this->c = (char) this->f;
 		this->i = (int) this->f;
 		this->d = (double) this->f;
-		return true;
 	}
-	return false;
+	return isFloat;
 }
 
 bool Converter::fromDouble(std::string const & str)
 {
-	char const *s = str.c_str();
 	static char const *constants[3] = {
 		"-inf", "+inf", "nan"
 	};
-	static double const values[3] = {}
+	static double const values[3] = {
+		std::numeric_limits<double>::min(),
+		std::numeric_limits<double>::max(),
+		nan("")
+	};
+	bool isDouble;
 
 	for (int i = 0; i < 3; i++)
 	{
-		if (std::strcmp(s, constants[i]) == 0)
-			return true;
+		if (str == constants[i])
+		{
+			this->d = values[i];
+			isDouble = true;
+			intConvertible = false;
+		}
 	}
-	s = consumeDouble(s);
-	if (*s == '\0')
+	if (!isDouble)
+	{
+		char const *s = str.c_str();
+		s = consumeDouble(s);
+		if (*s == '\0')
+		{
+			isDouble = true;
+			std::stringstream ss(str);
+			ss >> this->d;
+		}
+	}
+	if (isDouble)
 	{
 		this->t = DOUBLE;
-		std::stringstream ss(str);
-		ss >> this->d;
 		this->c = (char) this->d;
 		this->i = (int) this->d;
 		this->f = (float) this->d;
-		return true;
 	}
-	return false;
+	return isDouble;
 }
 
 bool Converter::fromChar(std::string const & str)
 {
-	if ((str.length() == 3) && (str[0] == '\'') && (str[2] == '\''))
+	if (str.length() == 3)// && str[0] == '\'' && str[2] == '\'')
 	{
 		this->t = CHAR;
 		this->c = str[1];
@@ -167,13 +199,26 @@ bool Converter::fromChar(std::string const & str)
 void Converter::show()
 {
 	if (this->t == UNKNOWN)
-		std::cout << "Given input is not of any acceped types" << std::endl;
+	{
+		std::cout << "Given input is not of any acceped types" <<  std::endl;
+		return ;
+	}
 	std::cout << "char: ";
-	if (std::isprint(this->c))
-		std::cout << this->c;
+	if (!this->intConvertible)
+		std::cout << "impossible" << std::endl;
+	else if (std::isprint(this->c))
+		std::cout << "'" << this->c << "'" << std::endl;
 	else
-		std::cout << "Non displayable";
-
+		std::cout << "Non displayable" << std::endl;
+	std::cout << "int: ";
+	if (!this->intConvertible)
+		std::cout << "impossible" << std::endl;
+	else
+		std::cout << this->i << std::endl;
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << "float: " << this->f << 'f' << std::endl;
+	std::cout << "double: " << this->d << std::endl;
+	std::cout.clear();
 }
 
 int main(int argc, char const *argv[])
@@ -185,6 +230,7 @@ int main(int argc, char const *argv[])
 	}
 	Converter conv;
 	conv.fromString(argv[1]);
+	conv.show();
 	return 0;
 }
 
