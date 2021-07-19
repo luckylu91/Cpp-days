@@ -1,8 +1,8 @@
 CC =	clang++
 CFLAGS = -Wall -Wextra -Werror
 NAME =	convert
-SRCS =	main.cpp
-INC =
+SRCS =	main.cpp Converter.cpp
+INC = Converter.hpp
 
 all:	$(NAME)
 
