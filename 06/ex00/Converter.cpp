@@ -62,9 +62,9 @@ bool Converter::fromInt(std::string const & str)
 		this->t = INT;
 		std::stringstream ss(str);
 		ss >> this->i;
-		this->c = (char) this->i;
-		this->f = (float) this->i;
-		this->d = (double) this->i;
+		this->c = static_cast<char>(this->i);
+		this->f = static_cast<float>(this->i);
+		this->d = static_cast<double>(this->i);
 		return true;
 	}
 	return false;
@@ -105,9 +105,9 @@ bool Converter::fromFloat(std::string const & str)
 	if (isFloat)
 	{
 		this->t = FLOAT;
-		this->c = (char) this->f;
-		this->i = (int) this->f;
-		this->d = (double) this->f;
+		this->c = static_cast<char>(this->f);
+		this->i = static_cast<int>(this->f);
+		this->d = static_cast<double>(this->f);
 	}
 	return isFloat;
 }
@@ -147,9 +147,9 @@ bool Converter::fromDouble(std::string const & str)
 	if (isDouble)
 	{
 		this->t = DOUBLE;
-		this->c = (char) this->d;
-		this->i = (int) this->d;
-		this->f = (float) this->d;
+		this->c = static_cast<char>(this->d);
+		this->i = static_cast<int>(this->d);
+		this->f = static_cast<float>(this->d);
 	}
 	return isDouble;
 }
@@ -160,9 +160,9 @@ bool Converter::fromChar(std::string const & str)
 	{
 		this->t = CHAR;
 		this->c = str[1];
-		this->i = (int) this->c;
-		this->f = (float) this->c;
-		this->d = (double) this->c;
+		this->i = static_cast<int>(this->c);
+		this->f = static_cast<float>(this->c);
+		this->d = static_cast<double>(this->c);
 		return true;
 	}
 	return false;
