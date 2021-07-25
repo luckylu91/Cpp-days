@@ -68,14 +68,14 @@ void Span::addNumber(int i) throw(Span::ContainerIsFullException)
 
 int Span::shortestSpan() const throw(Span::NotEnoughElementsException)
 {
-	unsigned int shortest;
+	int				sp;
+	unsigned int	shortest;
 
 	if (this->_len < 2)
 		throw Span::NotEnoughElementsException();
 	shortest = abs(this->_content[0] - this->_content[1]);
 	for (unsigned int i = 0; i < this->_len - 1; i++)
 	{
-		std::min
 		for (unsigned int j = i + 1; j < this->_len; j++)
 		{
 			sp = abs(this->_content[i] - this->_content[j]);
@@ -89,7 +89,10 @@ int Span::longestSpan() const throw(Span::NotEnoughElementsException)
 {
 	if (this->_len < 2)
 		throw Span::NotEnoughElementsException();
-
+	int *content_end = this->_content + sizeof(this->_content) / sizeof(*this->_content);
+	int min = *std::min_element(this->_content, content_end);
+	int max = *std::max_element(this->_content, content_end);
+	return (max - min);
 }
 
 Span::ContainerIsFullException::ContainerIsFullException(Span const & span)
