@@ -1,7 +1,7 @@
 #include "functions.hpp"
 #include <iostream>
 
-template <class T>
+template <typename T>
 void testOne(T & a, T & b)
 {
 	std::cout << "min(" << a << ", " << b << ") = " << min(a, b) << std::endl;

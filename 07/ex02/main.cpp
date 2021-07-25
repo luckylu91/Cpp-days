@@ -2,7 +2,7 @@
 #include <iostream>
 #include <exception>
 
-template <class T>
+template <typename T>
 void printAll(Array<T> a)
 {
 	for (unsigned int i = 0; i < a.size(); i++)

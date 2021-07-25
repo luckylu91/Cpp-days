@@ -2,7 +2,7 @@
 #include <cstring>
 #include <exception>
 
-template <class T>
+template <typename T>
 class Array
 {
 private:

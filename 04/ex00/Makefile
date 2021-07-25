@@ -1,5 +1,5 @@
 CC =	clang++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME =	prog
 SRCS =	main.cpp Sorcerer.cpp Victim.cpp Peon.cpp
 INC =	Sorcerer.hpp Victim.hpp Peon.hpp

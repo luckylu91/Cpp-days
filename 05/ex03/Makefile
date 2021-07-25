@@ -1,5 +1,5 @@
 CC =	clang++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME =	prog
 SRCS =	main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp \
 	RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp

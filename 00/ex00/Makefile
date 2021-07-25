@@ -4,7 +4,7 @@ SRCS = megaphone.cpp
 all: $(NAME)
 
 $(NAME):	$(SRCS)
-	clang++ $(SRCS) -o $@ -Wall -Wextra -Werror
+	clang++ $(SRCS) -o $@ -Wall -Wextra -Werror -std=c++98
 
 fclean:
 	rm -f $(NAME)

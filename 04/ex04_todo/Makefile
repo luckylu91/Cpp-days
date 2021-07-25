@@ -1,5 +1,5 @@
 CC =	clang++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME =	prog
 SRCS =	main.cpp DeepCoreMiner.cpp StripMiner.cpp AsteroKreog.cpp KoalaSteroid.cpp MiningBarge.cpp main.cpp
 INC = DeepCoreMiner.hpp StripMiner.hpp AsteroKreog.hpp KoalaSteroid.hpp KoalaSteroid.cpp MiningBarge.hpp IAsteroid.hpp IMiningLaser.hpp

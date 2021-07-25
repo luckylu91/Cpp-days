@@ -1,5 +1,5 @@
 CC =	clang++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME =	convert
 SRCS =	main.cpp Converter.cpp
 INC = Converter.hpp

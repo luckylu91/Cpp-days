@@ -5,7 +5,7 @@ HEADERS = Contact.hpp
 all:	$(NAME)
 
 $(NAME):	$(SRCS) $(HEADERS)
-	clang++ $(SRCS) -o $@ -Wall -Wextra -Werror
+	clang++ $(SRCS) -o $@ -Wall -Wextra -Werror -std=c++98
 
 fclean:
 	rm -f $(NAME)

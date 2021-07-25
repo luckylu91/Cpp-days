@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstring>
 
-template <class T>
+template <typename T>
 void printElem(T & elem)
 {
 	std::cout << elem << std::endl;
