@@ -1,8 +1,8 @@
 CC =	clang++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME =	prog
-SRCS =	main.cpp Sorcerer.cpp Victim.cpp Peon.cpp
-INC =	Sorcerer.hpp Victim.hpp Peon.hpp
+SRCS =	main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+INC =	Animal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp
 
 all:	$(NAME)
 
