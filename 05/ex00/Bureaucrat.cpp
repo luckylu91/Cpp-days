@@ -21,7 +21,7 @@ std::ostream & operator<<(std::ostream & os, Bureaucrat const & b)
 
 Bureaucrat::Bureaucrat(std::string name, int grade)
 	throw(GradeTooLowException, GradeTooHighException)
-	: name(name), grade(grade)
+	: _name(name), _grade(grade)
 {
 	if (grade < 1)
 		throw (GradeTooHighException());
@@ -29,40 +29,36 @@ Bureaucrat::Bureaucrat(std::string name, int grade)
 		throw (GradeTooLowException());
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const & other) : name(other.name), grade(other.grade) {}
+Bureaucrat::Bureaucrat(Bureaucrat const & other) : _name(other._name), _grade(other._grade) {}
 
 Bureaucrat::~Bureaucrat() {}
 
-Bureaucrat & Bureaucrat::operator=(Bureaucrat const & other)
-{
-	name = other.name;
-	grade = other.grade;
-	return *this;
-}
+//Unreachable
+Bureaucrat & Bureaucrat::operator=(Bureaucrat const &) { return *this; }
 
 std::string const & Bureaucrat::getName() const
 {
-	return name;
+	return this->_name;
 }
 
 int Bureaucrat::getGrade() const
 {
-	return grade;
+	return this->_grade;
 }
 
 Bureaucrat & Bureaucrat::operator++()
 {
-	if (grade - 1 < 1)
+	if (this->_grade - 1 < 1)
 		throw (GradeTooHighException());
-	--grade;
+	--this->_grade;
 	return (*this);
 }
 
 Bureaucrat & Bureaucrat::operator--()
 {
-	if (grade + 1 > 150)
+	if (this->_grade + 1 > 150)
 		throw (GradeTooLowException());
-	++grade;
+	++this->_grade;
 	return (*this);
 }
 

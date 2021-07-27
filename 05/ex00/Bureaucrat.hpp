@@ -5,8 +5,9 @@
 class Bureaucrat
 {
 private:
-	std::string	name;
-	int			grade;
+	std::string const	_name;
+	int					_grade;
+	Bureaucrat & operator=(Bureaucrat const &);
 
 public:
 	struct GradeTooHighException : public std::exception
@@ -20,8 +21,7 @@ public:
 	};
 	Bureaucrat(std::string name, int grade) throw(GradeTooLowException, GradeTooHighException);
 	Bureaucrat(Bureaucrat const &);
-	~Bureaucrat();
-	Bureaucrat & operator=(Bureaucrat const &);
+	virtual ~Bureaucrat();
 	std::string const & getName() const;
 	int getGrade() const;
 	Bureaucrat & operator++();

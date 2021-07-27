@@ -43,28 +43,6 @@ static void createForm(std::string name, int rSign, int rExecute) throw ()
 	}
 }
 
-static void trySign(Bureaucrat const & b, Form & f)
-{
-	static const std::string red("\033[0;31m");
-	static const std::string green("\033[0;32m");
-	static const std::string reset("\033[0m");
-
-	std::cout << "Trying to make " << b << " sign <" << f << ">" << std::endl;
-	try
-	{
-		f.beSigned(b);
-		std::cout << green << "Success !" << reset;
-		std::cout << " Bureaucrat " << b.getName();
-		std::cout << " managed to sign form '" << f.getName();
-		std::cout << "'" << std::endl;
-	}
-	catch(const Form::GradeTooLowException & e)
-	{
-		std::cout << red << "Failure !" << reset << std::endl;
-		std::cout << "The problem was : " << e.what() << std::endl;
-	}
-}
-
 int main()
 {
 	{
@@ -103,8 +81,8 @@ int main()
 		Form teslaContract("Tesla Contract", 10, 5);
 		Form crosswords("WC's crosswords", 150, 150);
 
-		trySign(intern, teslaContract);
-		trySign(boss, teslaContract);
-		trySign(intern, crosswords);
+		intern.signForm(teslaContract);
+		boss.signForm(teslaContract);
+		intern.signForm(crosswords);
 	}
 }

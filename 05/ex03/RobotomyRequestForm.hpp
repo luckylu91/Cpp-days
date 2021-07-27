@@ -6,13 +6,13 @@
 class RobotomyRequestForm : public Form
 {
 private:
-	std::string target;
+	RobotomyRequestForm & operator=(RobotomyRequestForm const &);
+	std::string _target;
 	static std::string _nameFromTarget(std::string const & target);
-	static bool robotomyAleas;
+	static bool _robotomyAleas;
 public:
 	RobotomyRequestForm(std::string const & target);
 	RobotomyRequestForm(RobotomyRequestForm const &);
-	~RobotomyRequestForm();
+	virtual ~RobotomyRequestForm();
 	virtual void execute(Bureaucrat const & executor) const;
-	// cannot be assigned (same as Form)
 };

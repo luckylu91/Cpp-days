@@ -1,5 +1,8 @@
 #include "Form.hpp"
 
+// Uneachable
+Form & Form::operator=(Form const &) { return *this; };
+
 std::string	Form::_exceptionMessage(std::string fieldName, bool low) const
 {
 	std::stringstream ss;
@@ -13,11 +16,11 @@ std::string	Form::_exceptionMessage(Bureaucrat const & b, bool actionIsSign) con
 {
 	std::stringstream ss;
 	std::string actionStr(actionIsSign ? "sign" : "execute");
-	int gradeRequired = actionIsSign ? requireSign : requireExecute;
+	int gradeRequired = actionIsSign ? _requireSign : _requireExecute;
 
-	ss << "The bureaucrat named " << b.getName();
-	ss << " has a grade too low to " << actionStr <<" this form ";
-	ss << "(bureaucrat'grade : " << b.getGrade();
+	ss << b.getName();
+	ss << " has a grade too low to " << actionStr << " this form ";
+	ss << "(bureaucrat's grade : " << b.getGrade();
 	ss << ", form requires: " << gradeRequired << ")";
 	return ss.str();
 }
@@ -32,8 +35,11 @@ const char * Form::GradeTooLowException::what() const throw() { return _msg.c_st
 
 const char * Form::NotSignedException::what() const throw() { return "The form is not signed"; }
 
-Form::Form(std::string name, int rSign, int rExecute) : isSigned(false),
-	name(name), requireSign(rSign), requireExecute(rExecute)
+Form::GradeTooHighException::~GradeTooHighException() throw() {}
+Form::GradeTooLowException::~GradeTooLowException() throw() {}
+
+Form::Form(std::string name, int rSign, int rExecute) : _isSigned(false),
+	_name(name), _requireSign(rSign), _requireExecute(rExecute)
 {
 	if (rSign < 1)
 		throw (GradeTooHighException(_exceptionMessage("requireSign", false)));
@@ -45,29 +51,29 @@ Form::Form(std::string name, int rSign, int rExecute) : isSigned(false),
 		throw (GradeTooLowException(_exceptionMessage("requireExecute", true)));
 }
 
-Form::Form(Form const & other) : isSigned(other.isSigned), name(other.name),
-	requireSign(other.requireSign), requireExecute(other.requireExecute) {}
+Form::Form(Form const & other) : _isSigned(other._isSigned), _name(other._name),
+	_requireSign(other._requireSign), _requireExecute(other._requireExecute) {}
 
 Form::~Form() {}
 
 std::string const & Form::getName() const
 {
-	return name;
+	return this->_name;
 }
 
 int Form::getRequireSign() const
 {
-	return requireSign;
+	return this->_requireSign;
 }
 
 int Form::getRequireExecute() const
 {
-	return requireExecute;
+	return this->_requireExecute;
 }
 
 bool Form::getIsSigned() const
 {
-	return isSigned;
+	return this->_isSigned;
 }
 
 std::ostream & operator<< (std::ostream & os, Form const & form)
@@ -82,9 +88,9 @@ std::ostream & operator<< (std::ostream & os, Form const & form)
 
 void Form::beSigned(Bureaucrat const & b) throw(Form::GradeTooLowException)
 {
-	if (b.getGrade() <= requireSign)
+	if (b.getGrade() <= this->_requireSign)
 	{
-		isSigned = true;
+		this->_isSigned = true;
 	}
 	else
 		throw Form::GradeTooLowException(_exceptionMessage(b, true));
@@ -92,8 +98,8 @@ void Form::beSigned(Bureaucrat const & b) throw(Form::GradeTooLowException)
 
 void Form::execute(Bureaucrat const & executor) const
 {
-	if (executor.getGrade() > requireExecute)
+	if (executor.getGrade() > this->_requireExecute)
 		throw Form::GradeTooLowException(_exceptionMessage(executor, false));
-	if (!isSigned)
+	if (!this->_isSigned)
 		throw Form::NotSignedException();
 }

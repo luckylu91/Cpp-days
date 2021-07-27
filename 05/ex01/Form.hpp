@@ -4,14 +4,17 @@
 #include <exception>
 #include <iostream>
 
+class Bureaucrat;
+
 class Form
 {
 private:
-	bool				isSigned;
-	std::string const	name;
-	int const			requireSign;
-	int const			requireExecute;
+	bool				_isSigned;
+	std::string const	_name;
+	int const			_requireSign;
+	int const			_requireExecute;
 
+	Form & operator=(Form const &);
 	std::string	_exceptionMessage(std::string fieldName, bool low) const;
 	std::string	_exceptionMessage(Bureaucrat const & b) const;
 
@@ -19,6 +22,7 @@ public:
 	class GradeTooHighException : public std::exception
 	{
 	public:
+		virtual ~GradeTooHighException() throw();
 		GradeTooHighException(std::string message);
 		virtual const char * what() const throw();
 	protected:
@@ -28,6 +32,7 @@ public:
 	class GradeTooLowException : public std::exception
 	{
 	public:
+		virtual ~GradeTooLowException() throw();
 		GradeTooLowException(std::string message);
 		virtual const char * what() const throw();
 	protected:
@@ -36,8 +41,7 @@ public:
 
 	Form(std::string name, int rSign, int rExecute);
 	Form(Form const &);
-	~Form();
-	// cant have assignation operator because some members are const
+	virtual ~Form();
 	std::string const & getName() const;
 	int getRequireSign() const;
 	int getRequireExecute() const;

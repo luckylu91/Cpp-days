@@ -6,12 +6,12 @@
 class PresidentialPardonForm : public Form
 {
 private:
-	std::string target;
+	PresidentialPardonForm & operator=(PresidentialPardonForm const &);
+	std::string _target;
 	static std::string _nameFromTarget(std::string const & target);
 public:
 	PresidentialPardonForm(std::string const & target);
 	PresidentialPardonForm(PresidentialPardonForm const &);
-	~PresidentialPardonForm();
+	virtual ~PresidentialPardonForm();
 	virtual void execute(Bureaucrat const & executor) const;
-	// cannot be assigned (same as Form)
 };

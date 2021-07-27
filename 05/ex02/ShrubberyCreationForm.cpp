@@ -1,15 +1,18 @@
 #include "ShrubberyCreationForm.hpp"
 
+// Unreachable
+ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm const &) { return *this; };
+
 std::string ShrubberyCreationForm::_nameFromTarget(std::string const & target)
 {
 	return target + " Shrubbery Creation Form";
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const & target)
-	: Form(_nameFromTarget(target), 145, 137), target(target) {}
+	: Form(_nameFromTarget(target), 145, 137), _target(target) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & other)
-	: Form(_nameFromTarget(other.target), 145, 137), target(other.target) {}
+	: Form(_nameFromTarget(other._target), 145, 137), _target(other._target) {}
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
@@ -17,17 +20,14 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
 	Form::execute(executor);
 
-	// std::string fname(target + "_shrubbery");
-	std::ofstream ofs(target + "_shrubbery");
-	// ofs.exceptions(std::ofstream::badbit);
-	// ofs.open(fname);
-	for (std::size_t i = 0; i < target.length(); i++)
+	std::ofstream ofs(this->_target + "_shrubbery");
+	for (std::size_t i = 0; i < this->_target.length(); i++)
 	{
 		for (std::size_t j = 0; j < i; j++)
 		{
 			if (j == 0)
 			{
-				if (i < target.length() - 1)
+				if (i < this->_target.length() - 1)
 					ofs << '|';
 				else
 					ofs << '`';
@@ -35,6 +35,6 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 			else
 				ofs << '-';
 		}
-		ofs << target[i] << std::endl;
+		ofs << this->_target[i] << std::endl;
 	}
 }

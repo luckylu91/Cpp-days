@@ -1,24 +1,12 @@
 #include "Intern.hpp"
 
-Intern::InvalidFormName::InvalidFormName(std::string const & formName)
-{
-	std::stringstream ss;
-	ss << "The form '" << formName << "' does not exist";
-	_msg = ss.str();
-}
-
-char const * Intern::InvalidFormName::what() const throw()
-{
-	return _msg.c_str();
-}
-
-Intern::t_formInit Intern::formCtors[3] = {
+Intern::t_formInit Intern::_formCreators[3] = {
 	Intern::presidentialFormInit,
 	Intern::robotomyFormInit,
 	Intern::shrubberyFormInit
 };
 
-std::string Intern::formNames[3] = {
+std::string Intern::_formNames[3] = {
 	"presidential pardon",
 	"robotomy request",
 	"shrubbery creation"
@@ -26,11 +14,11 @@ std::string Intern::formNames[3] = {
 
 Intern::Intern() {}
 
-Intern::Intern(Intern const & other) {}
+Intern::Intern(Intern const &) {}
 
 Intern::~Intern() {}
 
-Intern & Intern::operator=(Intern const & other) { return *this; }
+Intern & Intern::operator=(Intern const &) { return *this; }
 
 Form * Intern::presidentialFormInit(std::string const & target)
 {
@@ -49,14 +37,20 @@ Form * Intern::shrubberyFormInit(std::string const & target)
 
 Form * Intern::makeForm(std::string const & formName, std::string const & target) const
 {
+	static const std::string red("\033[0;31m");
+	static const std::string green("\033[0;32m");
+	static const std::string reset("\033[0m");
+
 	for (size_t i = 0; i < 3; i++)
 	{
-		if (formName == formNames[i])
+		if (formName == this->_formNames[i])
 		{
+			std::cout << green << "Succes ! " << reset;
 			std::cout << "Intern creates '" << formName << "'" << std::endl;
-			return formCtors[i](target);
+			return this->_formCreators[i](target);
 		}
 	}
-	throw Intern::InvalidFormName(formName);
+	std::cerr << red << "Failure !" << reset << std::endl;
+	std::cerr << "The form '" << formName << "' does not exist" << std::endl;
 	return NULL;
 }

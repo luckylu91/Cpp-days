@@ -14,24 +14,14 @@ private:
 	static Form * presidentialFormInit(std::string const & target);
 	static Form * robotomyFormInit(std::string const & target);
 	static Form * shrubberyFormInit(std::string const & target);
-	typedef Form * (Intern::*t_formInit)(std::string const & target);
-	static t_formInit formCtors[3];
-	static std::string formNames[3];
+	typedef Form * (*t_formInit)(std::string const & target);
+	static t_formInit _formCreators[3];
+	static std::string _formNames[3];
 
 public:
-
-	class InvalidFormName : public std::exception
-	{
-	private:
-		std::string _msg;
-	public:
-		InvalidFormName(std::string const & formName);
-		virtual char const * what() const throw();
-	};
-
 	Intern();
 	Intern(Intern const &);
-	~Intern();
+	virtual ~Intern();
 	Intern & operator=(Intern const &);
 	Form * makeForm(std::string const & formName, std::string const & target) const;
 };

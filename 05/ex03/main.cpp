@@ -48,49 +48,6 @@ static void createForm(std::string name, int rSign, int rExecute) throw ()
 	}
 }
 
-static void trySign(Bureaucrat const & b, Form & f)
-{
-	static const std::string red("\033[0;31m");
-	static const std::string green("\033[0;32m");
-	static const std::string reset("\033[0m");
-
-	std::cout << "Trying to make " << b << " sign <" << f << ">" << std::endl;
-	try
-	{
-		f.beSigned(b);
-		std::cout << green << "Success !" << reset;
-		std::cout << " Bureaucrat " << b.getName();
-		std::cout << " managed to sign form '" << f.getName();
-		std::cout << "'" << std::endl;
-	}
-	catch(const Form::GradeTooLowException & e)
-	{
-		std::cout << red << "Failure !" << reset << std::endl;
-		std::cout << "The problem was : " << e.what() << std::endl;
-	}
-}
-
-static void internCreateForm(Intern & i, std::string const & formName, std::string const & target)
-{
-	static const std::string red("\033[0;31m");
-	static const std::string green("\033[0;32m");
-	static const std::string reset("\033[0m");
-
-	std::cout << "Trying to make intern create form '" << formName;
-	std::cout << "'" << std::endl;
-	try
-	{
-		Form * f = i.makeForm(formName, target);
-		std::cout << green << "Success !" << reset << std::endl;
-		delete f;
-	}
-	catch (std::exception & e)
-	{
-		std::cout << red << "Failure !" << reset << std::endl;
-		std::cout << "The problem was : " << e.what() << std::endl;
-	}
-}
-
 int main()
 {
 	{
@@ -128,9 +85,9 @@ int main()
 		Form teslaContract("Tesla Contract", 10, 5);
 		Form crosswords("WC's crosswords", 150, 150);
 
-		trySign(intern, teslaContract);
-		trySign(boss, teslaContract);
-		trySign(intern, crosswords);
+		intern.signForm(teslaContract);
+		boss.signForm(teslaContract);
+		intern.signForm(crosswords);
 	}
 	std::cout << std::endl;
 	{
@@ -143,9 +100,9 @@ int main()
 
 		intern.executeForm(shForm);
 		boss.executeForm(robForm);
-		shForm.beSigned(boss);
-		presForm.beSigned(boss);
-		robForm.beSigned(boss);
+		boss.signForm(shForm);
+		boss.signForm(presForm);
+		boss.signForm(robForm);
 		boss.executeForm(shForm);
 		boss.executeForm(presForm);
 		boss.executeForm(robForm);
@@ -154,9 +111,15 @@ int main()
 	{
 		Intern someIntern;
 
-		internCreateForm(someIntern, "presidential pardon", "coco l'asticot");
-		internCreateForm(someIntern, "robotomy request", "micro ondine");
-		internCreateForm(someIntern, "shrubbery creation", "merguez");
-		internCreateForm(someIntern, "not_a_form", "not_a_target");
+		Form *f;
+
+		f = someIntern.makeForm("presidential pardon", "coco l'asticot");
+		delete f;
+		f = someIntern.makeForm("robotomy request", "micro ondine");
+		delete f;
+		f = someIntern.makeForm("shrubbery creation", "merguez");
+		delete f;
+		f = someIntern.makeForm("not_a_form", "not_a_target");
+		delete f;
 	}
 }

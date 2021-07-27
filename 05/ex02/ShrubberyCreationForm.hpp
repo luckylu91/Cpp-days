@@ -7,12 +7,12 @@
 class ShrubberyCreationForm : public Form
 {
 private:
-	std::string target;
+	ShrubberyCreationForm & operator=(ShrubberyCreationForm const &);
+	std::string _target;
 	static std::string _nameFromTarget(std::string const & target);
 public:
 	ShrubberyCreationForm(std::string const & target);
 	ShrubberyCreationForm(ShrubberyCreationForm const &);
-	~ShrubberyCreationForm();
+	virtual ~ShrubberyCreationForm();
 	virtual void execute(Bureaucrat const & executor) const;
-	// cannot be assigned (same as Form)
 };
