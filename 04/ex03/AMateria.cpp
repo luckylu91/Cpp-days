@@ -1,13 +1,8 @@
 #include "AMateria.hpp"
 
-AMateria::AMateria() {}
-
 AMateria::AMateria(std::string const & type) : type(type) {}
 
 AMateria::AMateria(AMateria const & other) : type(other.type) {}
-
-// Unreachable
-AMateria & AMateria::operator=(AMateria const &) { return *this; }
 
 AMateria::~AMateria() {}
 
