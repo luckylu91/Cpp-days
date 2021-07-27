@@ -30,6 +30,6 @@ int main()
 		std::cout << "-> Assigning Cat" << std::endl;
 		cat3 = cat1;
 
-		std::cout << "-> End of Scope (destruction)" << std::endl;
+		std::cout << std::endl << "-> End of Scope (destruction)" << std::endl;
 	}
 }

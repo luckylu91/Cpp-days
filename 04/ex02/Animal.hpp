@@ -4,13 +4,14 @@
 
 class Animal
 {
-protected:
+private:
 	Animal();
-	Animal(std::string const & type);
 	Animal(Animal const &);
+	virtual Animal & operator=(Animal const &);
+protected:
 	std::string _type;
+	Animal(std::string const & type);
 public:
-	virtual Animal & operator=(Animal const &) = 0;
 	virtual ~Animal();
 	virtual void makeSound() const = 0;
 	std::string getType() const;

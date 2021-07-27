@@ -24,12 +24,17 @@ int main()
 		alice->use(0, *bob);
 		alice->use(1, *bob);
 
+		tmp = new Ice();
+		alice->equip(tmp);
+		alice->unequip(2); // <- stupid
+
+		std::cout << "-> Deleting src" << std::endl;
+		delete src;
 		std::cout << "-> Deleting bob" << std::endl;
 		delete bob;
 		std::cout << "-> Deleting alice" << std::endl;
 		delete alice;
-		std::cout << "-> Deleting src" << std::endl;
-		delete src;
+		delete tmp; // <- previously unequiped, so no error (and Ice desructor called)
 	}
 
 	std::cout << std::endl;

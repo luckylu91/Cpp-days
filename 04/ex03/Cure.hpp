@@ -6,11 +6,9 @@
 
 class Cure : public AMateria
 {
-private:
+public:
 	Cure(Cure const &);
 	Cure & operator=(Cure const &);
-
-public:
 	Cure();
 	virtual ~Cure();
 

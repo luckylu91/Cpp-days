@@ -6,11 +6,9 @@
 
 class Ice : public AMateria
 {
-private:
+public:
 	Ice & operator=(Ice const &);
 	Ice(Ice const &);
-
-public:
 	Ice();
 	virtual ~Ice();
 
