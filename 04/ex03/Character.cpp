@@ -4,7 +4,17 @@ void Character::_copy(Character const & other)
 {
 	for (int j = 0; j < other.n_materias; j++)
 	{
-		inventory[j] = other.inventory[j];
+		inventory[j] = other.inventory[j]->clone();
+	}
+}
+
+void Character::_delete()
+{
+	for (int i = 0; i < n_materias; i++)
+	{
+		std::cout << "Deleting " << inventory[i]->getType();
+		std::cout << " materia from " << name << "'s inventory" << std::endl;
+		delete inventory[i];
 	}
 }
 
@@ -17,14 +27,12 @@ Character::Character(Character const & other) : name(other.name), n_materias(oth
 
 Character::~Character()
 {
-	for (int i = 0; i < n_materias; i++)
-	{
-		delete inventory[i];
-	}
+	_delete();
 }
 
 Character & Character::operator=(Character const & other)
 {
+	_delete();
 	name = other.name;
 	n_materias = other.n_materias;
 	_copy(other);

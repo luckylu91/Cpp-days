@@ -6,11 +6,7 @@ Cure::Cure(Cure const & other) : AMateria(other) {}
 
 Cure::~Cure() {}
 
-Cure & Cure::operator=(Cure const & other)
-{
-	AMateria::operator=(other);
-	return *this;
-}
+Cure & Cure::operator=(Cure const &) { return *this; }
 
 Cure* Cure::clone() const
 {

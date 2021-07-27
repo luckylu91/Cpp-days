@@ -10,6 +10,7 @@ private:
 	AMateria	*inventory[4];
 	int			n_materias;
 	void		_copy(Character const & other);
+	void		_delete();
 public:
 	Character(std::string const & name);
 	Character(Character const &);

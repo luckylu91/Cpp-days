@@ -6,11 +6,13 @@
 
 class Ice : public AMateria
 {
+private:
+	Ice & operator=(Ice const &);
+	Ice(Ice const &);
+
 public:
 	Ice();
-	Ice(Ice const &);
 	virtual ~Ice();
-	Ice & operator=(Ice const &);
 
 	virtual Ice* clone() const;
 	virtual void use(ICharacter& target);

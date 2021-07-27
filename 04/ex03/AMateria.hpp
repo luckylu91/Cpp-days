@@ -9,10 +9,10 @@ class AMateria
 protected:
 	std::string type;
 	AMateria();
-	AMateria(AMateria const & other);
 	AMateria & operator=(AMateria const &);
 public:
 	AMateria(std::string const & type);
+	AMateria(AMateria const & other);
 	virtual ~AMateria();
 
 	std::string const & getType() const;

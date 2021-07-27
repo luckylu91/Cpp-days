@@ -8,6 +8,7 @@ private:
 	AMateria	*inventory[4];
 	int			n_materias;
 	void		_copy(MateriaSource const & other);
+	void		_delete();
 public:
 	MateriaSource();
 	MateriaSource(MateriaSource const &);

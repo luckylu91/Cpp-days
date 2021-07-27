@@ -6,11 +6,13 @@
 
 class Cure : public AMateria
 {
+private:
+	Cure(Cure const &);
+	Cure & operator=(Cure const &);
+
 public:
 	Cure();
-	Cure(Cure const &);
 	virtual ~Cure();
-	Cure & operator=(Cure const &);
 
 	virtual Cure* clone() const;
 	virtual void use(ICharacter& target);
