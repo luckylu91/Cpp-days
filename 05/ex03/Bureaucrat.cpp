@@ -90,7 +90,7 @@ void Bureaucrat::executeForm(Form const & form) const
 	static const std::string green("\033[0;32m");
 	static const std::string reset("\033[0m");
 
-	std::cout << "Trying to make " << *this << " sign <" << form << ">" << std::endl;
+	std::cout << "Trying to make " << *this << " execute <" << form << ">" << std::endl;
 	try
 	{
 		form.execute(*this);

@@ -1,5 +1,8 @@
 #include "Form.hpp"
 
+// Unreachable
+Form::Form() : _requireSign(0), _requireExecute(0) {}
+
 // Uneachable
 Form & Form::operator=(Form const &) { return *this; };
 

@@ -14,6 +14,7 @@ private:
 	int const			_requireSign;
 	int const			_requireExecute;
 
+	Form();
 	Form & operator=(Form const &);
 	std::string	_exceptionMessage(std::string fieldName, bool low) const;
 	std::string	_exceptionMessage(Bureaucrat const & b) const;

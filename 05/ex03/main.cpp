@@ -26,27 +26,27 @@ static void createBureaucrat(std::string name, int grade) throw ()
 	}
 }
 
-static void createForm(std::string name, int rSign, int rExecute) throw ()
-{
+// static void createForm(std::string name, int rSign, int rExecute) throw ()
+// {
 
-	static const std::string red("\033[0;31m");
-	static const std::string green("\033[0;32m");
-	static const std::string reset("\033[0m");
+// 	static const std::string red("\033[0;31m");
+// 	static const std::string green("\033[0;32m");
+// 	static const std::string reset("\033[0m");
 
-	std::cout << "Trying to create a form named " << name;
-	std::cout << ", requiresign = " << rSign;
-	std::cout << ", requireExecute = " << rExecute << std::endl;
-	try
-	{
-		Form f(name, rSign, rExecute);
-		std::cout << green << "Success !" << reset << std::endl;
-	}
-	catch (std::exception & e)
-	{
-		std::cout << red << "Failure !" << reset << std::endl;
-		std::cout << "The problem was : " << e.what() << std::endl;
-	}
-}
+// 	std::cout << "Trying to create a form named " << name;
+// 	std::cout << ", requiresign = " << rSign;
+// 	std::cout << ", requireExecute = " << rExecute << std::endl;
+// 	try
+// 	{
+// 		Form f(name, rSign, rExecute);
+// 		std::cout << green << "Success !" << reset << std::endl;
+// 	}
+// 	catch (std::exception & e)
+// 	{
+// 		std::cout << red << "Failure !" << reset << std::endl;
+// 		std::cout << "The problem was : " << e.what() << std::endl;
+// 	}
+// }
 
 int main()
 {
@@ -73,22 +73,22 @@ int main()
 		}
 	}
 	std::cout << std::endl;
-	{
-		createForm("fRequireLow", 0, 20);
-		createForm("fRequireHigh", 152, 20);
-		createForm("fExecuteLow", 20, -1);
-		createForm("fExecuteHigh", 20, 12000);
-		createForm("fOK", 10, 10);
+	// {
+	// 	createForm("fRequireLow", 0, 20);
+	// 	createForm("fRequireHigh", 152, 20);
+	// 	createForm("fExecuteLow", 20, -1);
+	// 	createForm("fExecuteHigh", 20, 12000);
+	// 	createForm("fOK", 10, 10);
 
-		Bureaucrat boss("Boss", 1);
-		Bureaucrat intern("Billy", 150);
-		Form teslaContract("Tesla Contract", 10, 5);
-		Form crosswords("WC's crosswords", 150, 150);
+	// 	Bureaucrat boss("Boss", 1);
+	// 	Bureaucrat intern("Billy", 150);
+	// 	Form teslaContract("Tesla Contract", 10, 5);
+	// 	Form crosswords("WC's crosswords", 150, 150);
 
-		intern.signForm(teslaContract);
-		boss.signForm(teslaContract);
-		intern.signForm(crosswords);
-	}
+	// 	intern.signForm(teslaContract);
+	// 	boss.signForm(teslaContract);
+	// 	intern.signForm(crosswords);
+	// }
 	std::cout << std::endl;
 	{
 		ShrubberyCreationForm	shForm("eco-friendly-polyurethan");

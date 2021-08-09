@@ -1,6 +1,9 @@
 #include "RobotomyRequestForm.hpp"
 
 // Unreachable
+RobotomyRequestForm::RobotomyRequestForm() {}
+
+// Unreachable
 RobotomyRequestForm & RobotomyRequestForm::operator=(RobotomyRequestForm const &) { return *this; };
 
 std::string RobotomyRequestForm::_nameFromTarget(std::string const & target)
@@ -11,17 +14,17 @@ std::string RobotomyRequestForm::_nameFromTarget(std::string const & target)
 bool RobotomyRequestForm::_robotomyAleas = true;
 
 RobotomyRequestForm::RobotomyRequestForm(std::string const & target)
-	: Form(_nameFromTarget(target), 72, 45), _target(target) {}
+	: Form(_nameFromTarget(target), 72, 45, target) {}
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & other)
-	: Form(_nameFromTarget(other._target), 145, 137), _target(other._target) {}
+	: Form(_nameFromTarget(other._target), 72, 45, other._target) {}
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	Form::execute(executor);
-	std::cout << "The robotomy of " << _target << " was ";
-	std::cout << (_robotomyAleas ? "successful !" : "a failure...") << std::endl;
-	_robotomyAleas = !_robotomyAleas;
+	Form::_execute(executor);
+	std::cout << "The robotomy of " << this->_target << " was ";
+	std::cout << (RobotomyRequestForm::_robotomyAleas ? "successful !" : "a failure...") << std::endl;
+	RobotomyRequestForm::_robotomyAleas = !RobotomyRequestForm::_robotomyAleas;
 }

@@ -6,8 +6,8 @@
 class RobotomyRequestForm : public Form
 {
 private:
+	RobotomyRequestForm();
 	RobotomyRequestForm & operator=(RobotomyRequestForm const &);
-	std::string _target;
 	static std::string _nameFromTarget(std::string const & target);
 	static bool _robotomyAleas;
 public:

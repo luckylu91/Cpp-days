@@ -1,5 +1,8 @@
 #include "Form.hpp"
 
+// Unreachable
+Form::Form() : _requireSign(0), _requireExecute(0) {}
+
 // Uneachable
 Form & Form::operator=(Form const &) { return *this; };
 
@@ -38,8 +41,8 @@ const char * Form::NotSignedException::what() const throw() { return "The form i
 Form::GradeTooHighException::~GradeTooHighException() throw() {}
 Form::GradeTooLowException::~GradeTooLowException() throw() {}
 
-Form::Form(std::string name, int rSign, int rExecute) : _isSigned(false),
-	_name(name), _requireSign(rSign), _requireExecute(rExecute)
+Form::Form(std::string name, int rSign, int rExecute, std::string target) : _isSigned(false),
+	_name(name), _requireSign(rSign), _requireExecute(rExecute), _target(target)
 {
 	if (rSign < 1)
 		throw (GradeTooHighException(_exceptionMessage("requireSign", false)));
@@ -96,7 +99,7 @@ void Form::beSigned(Bureaucrat const & b) throw(Form::GradeTooLowException)
 		throw Form::GradeTooLowException(_exceptionMessage(b, true));
 }
 
-void Form::execute(Bureaucrat const & executor) const
+void Form::_execute(Bureaucrat const & executor) const
 {
 	if (executor.getGrade() > this->_requireExecute)
 		throw Form::GradeTooLowException(_exceptionMessage(executor, false));

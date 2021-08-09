@@ -1,6 +1,9 @@
 #include "ShrubberyCreationForm.hpp"
 
 // Unreachable
+ShrubberyCreationForm::ShrubberyCreationForm() {}
+
+// Unreachable
 ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm const &) { return *this; };
 
 std::string ShrubberyCreationForm::_nameFromTarget(std::string const & target)
@@ -9,16 +12,16 @@ std::string ShrubberyCreationForm::_nameFromTarget(std::string const & target)
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const & target)
-	: Form(_nameFromTarget(target), 145, 137), _target(target) {}
+	: Form(_nameFromTarget(target), 145, 137, target) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & other)
-	: Form(_nameFromTarget(other._target), 145, 137), _target(other._target) {}
+	: Form(_nameFromTarget(other._target), 145, 137, other._target) {}
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
-	Form::execute(executor);
+	Form::_execute(executor);
 
 	std::ofstream ofs(this->_target + "_shrubbery");
 	for (std::size_t i = 0; i < this->_target.length(); i++)

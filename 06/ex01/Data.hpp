@@ -4,5 +4,5 @@ struct Data
 {
 	int		n;
 	char	comment[250];
-	bool operator==(Data const &) const;
+	bool	operator==(Data const &) const;
 };

@@ -14,9 +14,15 @@ private:
 	int const			_requireSign;
 	int const			_requireExecute;
 
-	Form & operator=(Form const &);
 	std::string	_exceptionMessage(std::string fieldName, bool low) const;
 	std::string	_exceptionMessage(Bureaucrat const & b, bool actionIsSign) const;
+
+protected:
+	std::string const	_target;
+
+	Form();
+	Form & operator=(Form const &);
+	void _execute(Bureaucrat const & executor) const;
 
 public:
 	class GradeTooHighException : public std::exception
@@ -44,7 +50,7 @@ public:
 		virtual const char * what() const throw();
 	};
 
-	Form(std::string name, int rSign, int rExecute);
+	Form(std::string name, int rSign, int rExecute, std::string target);
 	Form(Form const &);
 	virtual ~Form();
 	std::string const & getName() const;
@@ -52,7 +58,7 @@ public:
 	int getRequireExecute() const;
 	bool getIsSigned() const;
 	void beSigned(Bureaucrat const & b) throw(Form::GradeTooLowException);
-	virtual void execute(Bureaucrat const & executor) const;
+	virtual void execute(Bureaucrat const & executor) const = 0;
 };
 
 std::ostream & operator<<(std::ostream & os, Form const & f);
