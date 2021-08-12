@@ -24,6 +24,9 @@
 class Converter
 {
 private:
+	Converter(Converter const &);
+	Converter & operator=(Converter const &);
+
 	typedef enum e_type_from {CHAR, INT, FLOAT, DOUBLE, UNKNOWN} t_type_from;
 	bool		intitialized;
 	bool		charConvertible;
@@ -40,8 +43,6 @@ private:
 	void fromChar(std::string const & str);
 public:
 	Converter();
-	Converter(Converter const &);
-	Converter & operator=(Converter const &);
 	~Converter();
 	Converter & fromString(std::string const & str);
 	void show();

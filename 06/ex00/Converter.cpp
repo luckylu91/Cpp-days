@@ -4,9 +4,11 @@ Converter::Converter() : intitialized(false) {}
 
 Converter::~Converter() {}
 
-Converter::Converter(Converter const & other) = default;
+// Unreachable
+Converter::Converter(Converter const & other) {}
 
-Converter & Converter::operator=(Converter const & other) = default;
+// Unreachable
+Converter & Converter::operator=(Converter const & other) { return *this; }
 
 static char const *consumeMinus(char const *s)
 {
