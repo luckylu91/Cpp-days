@@ -62,7 +62,7 @@ int main()
 			while (1)
 			{
 				std::cout << "Promoting " << b << "..." << std::endl;
-				++b;
+				b.incrementGrade();
 				std::cout << b << std::endl;
 			}
 		}
@@ -90,7 +90,7 @@ int main()
 	// }
 	std::cout << std::endl;
 	{
-		ShrubberyCreationForm	shForm("eco-friendly-polyurethan");
+		ShrubberyCreationForm	shForm("ascii <3");
 		RobotomyRequestForm		robForm("Bender Rodriguez");
 		PresidentialPardonForm	presForm("Jeff Bezos");
 

@@ -3,8 +3,6 @@
 #include <string>
 #include <sstream>
 
-Bureaucrat & Bureaucrat::operator=(Bureaucrat const &) {return *this; }
-
 const char * Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return "Too high a grade for a Bureaucrat";
@@ -20,6 +18,12 @@ std::ostream & operator<<(std::ostream & os, Bureaucrat const & b)
 	os << "Bureaucrate <" << b.getName() << ">, grade " << b.getGrade();
 	return os;
 }
+
+//Unreachable
+Bureaucrat::Bureaucrat() {}
+
+//Unreachable
+Bureaucrat & Bureaucrat::operator=(Bureaucrat const &) { return *this; }
 
 Bureaucrat::Bureaucrat(std::string name, int grade)
 	throw(GradeTooLowException, GradeTooHighException)
@@ -45,7 +49,7 @@ int Bureaucrat::getGrade() const
 	return this->_grade;
 }
 
-Bureaucrat & Bureaucrat::operator++()
+Bureaucrat & Bureaucrat::incrementGrade()
 {
 	if (this->_grade - 1 < 1)
 		throw (GradeTooHighException());
@@ -53,7 +57,7 @@ Bureaucrat & Bureaucrat::operator++()
 	return (*this);
 }
 
-Bureaucrat & Bureaucrat::operator--()
+Bureaucrat & Bureaucrat::decrementGrade()
 {
 	if (this->_grade + 1 > 150)
 		throw (GradeTooLowException());

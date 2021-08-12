@@ -11,6 +11,7 @@ class Bureaucrat
 private:
 	std::string const	_name;
 	int					_grade;
+	Bureaucrat();
 	Bureaucrat & operator=(Bureaucrat const &);
 
 public:
@@ -29,8 +30,8 @@ public:
 	virtual ~Bureaucrat();
 	std::string const & getName() const;
 	int getGrade() const;
-	Bureaucrat & operator++();
-	Bureaucrat & operator--();
+	Bureaucrat & incrementGrade();
+	Bureaucrat & decrementGrade();
 	void signForm(Form &);
 	void executeForm(Form const & form) const;
 };

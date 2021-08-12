@@ -25,4 +25,3 @@ public:
 	Intern & operator=(Intern const &);
 	Form * makeForm(std::string const & formName, std::string const & target) const;
 };
-

@@ -46,7 +46,7 @@ int Bureaucrat::getGrade() const
 	return this->_grade;
 }
 
-Bureaucrat & Bureaucrat::operator++()
+Bureaucrat & Bureaucrat::incrementGrade()
 {
 	if (this->_grade - 1 < 1)
 		throw (GradeTooHighException());
@@ -54,7 +54,7 @@ Bureaucrat & Bureaucrat::operator++()
 	return (*this);
 }
 
-Bureaucrat & Bureaucrat::operator--()
+Bureaucrat & Bureaucrat::decrementGrade()
 {
 	if (this->_grade + 1 > 150)
 		throw (GradeTooLowException());

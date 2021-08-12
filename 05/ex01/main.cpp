@@ -58,7 +58,7 @@ int main()
 			while (1)
 			{
 				std::cout << "Promoting " << b << "..." << std::endl;
-				++b;
+				b.incrementGrade();
 				std::cout << b << std::endl;
 			}
 		}

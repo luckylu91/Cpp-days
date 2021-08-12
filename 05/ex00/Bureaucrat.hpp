@@ -24,8 +24,8 @@ public:
 	virtual ~Bureaucrat();
 	std::string const & getName() const;
 	int getGrade() const;
-	Bureaucrat & operator++();
-	Bureaucrat & operator--();
+	Bureaucrat & incrementGrade();
+	Bureaucrat & decrementGrade();
 };
 
 std::ostream & operator<<(std::ostream & os, Bureaucrat const & b);
