@@ -12,7 +12,7 @@ $(NAME):	$(SRCS)
 	$(CC) -o $@ $(SRCS) $(CFLAGS)
 
 fclean:
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

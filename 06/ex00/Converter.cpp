@@ -5,10 +5,10 @@ Converter::Converter() : intitialized(false) {}
 Converter::~Converter() {}
 
 // Unreachable
-Converter::Converter(Converter const & other) {}
+Converter::Converter(Converter const &) {}
 
 // Unreachable
-Converter & Converter::operator=(Converter const & other) { return *this; }
+Converter & Converter::operator=(Converter const &) { return *this; }
 
 static char const *consumeMinus(char const *s)
 {
@@ -133,7 +133,7 @@ void Converter::fromDouble(std::string const & str)
 		"-inf", "+inf", "nan"
 	};
 	static double const values[3] = {
-		INF_N, INF_P, NAN
+		INFD_N, INFD_P, NAND
 	};
 	bool isConstant = false;
 

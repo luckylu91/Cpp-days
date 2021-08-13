@@ -11,9 +11,9 @@
 #define INFF_N	std::numeric_limits<float>::min()
 #define INFF_P	std::numeric_limits<float>::max()
 #define NANF	nanf("")
-#define INF_N	std::numeric_limits<double>::min()
-#define INF_P	std::numeric_limits<double>::max()
-// #define NAN		nan("")
+#define INFD_N	std::numeric_limits<double>::min()
+#define INFD_P	std::numeric_limits<double>::max()
+#define NAND	nan("")
 
 #define INT_MAX_F static_cast<float>(INT_MAX)
 #define INT_MIN_F static_cast<float>(INT_MIN)
@@ -43,7 +43,7 @@ private:
 	void fromChar(std::string const & str);
 public:
 	Converter();
-	~Converter();
+	virtual ~Converter();
 	Converter & fromString(std::string const & str);
 	void show();
 };
