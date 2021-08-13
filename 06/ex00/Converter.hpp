@@ -8,17 +8,18 @@
 #include <climits>
 #include <cfloat>
 
-#define INFF_N	std::numeric_limits<float>::min()
-#define INFF_P	std::numeric_limits<float>::max()
+#define INFF_N	-std::numeric_limits<float>::infinity()
+#define INFF_P	std::numeric_limits<float>::infinity()
 #define NANF	nanf("")
-#define INFD_N	std::numeric_limits<double>::min()
-#define INFD_P	std::numeric_limits<double>::max()
+#define INFD_N	-std::numeric_limits<double>::infinity()
+#define INFD_P	std::numeric_limits<double>::infinity()
 #define NAND	nan("")
 
 #define INT_MAX_F static_cast<float>(INT_MAX)
 #define INT_MIN_F static_cast<float>(INT_MIN)
 #define INT_MAX_D static_cast<double>(INT_MAX)
 #define INT_MIN_D static_cast<double>(INT_MIN)
+#define FLOAT_MIN_D static_cast<double>(FLT_MIN)
 #define FLOAT_MAX_D static_cast<double>(FLT_MAX)
 
 class Converter

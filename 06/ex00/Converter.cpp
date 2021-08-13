@@ -36,11 +36,13 @@ static bool isFloat(std::string const & str)
 {
 	char const *s = str.c_str();
 
-	if (str == "-inff" || str == "+inff" || str == "nanf")
+	if (str == "-inff" || str == "+inff" || str == "inff" || str == "nanf")
 		return true;
 	if (str.empty() || str == ".")
 		return false;
 	s = consumeInt(s);
+	if (std::strcmp(s, "f") == 0)
+		return true;
 	if (*(s++) != '.')
 		return false;
 	s = consumeInt(s);
@@ -51,7 +53,7 @@ static bool isDouble(std::string const & str)
 {
 	char const *s = str.c_str();
 
-	if (str == "-inf" || str == "+inf" || str == "nan")
+	if (str == "-inf" || str == "+inf" || str == "inf" || str == "nan")
 		return true;
 	if (str.empty() || str == ".")
 		return false;
@@ -88,15 +90,15 @@ void Converter::fromInt(std::string const & str)
 
 void Converter::fromFloat(std::string const & str)
 {
-	static char const *constants[3] = {
-		"-inff", "+inff", "nanf"
+	static char const *constants[] = {
+		"-inff", "+inff", "inff", "nanf"
 	};
-	static double const values[3] = {
-		INFF_N, INFF_P, NANF
+	static double const values[] = {
+		INFF_N, INFF_P, INFF_P, NANF
 	};
 	bool isConstant = false;
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		if (str == constants[i])
 		{
@@ -129,15 +131,15 @@ void Converter::fromFloat(std::string const & str)
 
 void Converter::fromDouble(std::string const & str)
 {
-	static char const *constants[3] = {
-		"-inf", "+inf", "nan"
+	static char const *constants[] = {
+		"-inf", "+inf", "inf", "nan"
 	};
-	static double const values[3] = {
-		INFD_N, INFD_P, NAND
+	static double const values[] = {
+		INFD_N, INFD_P, INFD_P, NAND
 	};
 	bool isConstant = false;
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		if (str == constants[i])
 		{
@@ -166,7 +168,9 @@ void Converter::fromDouble(std::string const & str)
 	if (this->d > INT_MAX_D || this->d < INT_MIN_D)
 		this->intConvertible = false;
 	this->f = static_cast<float>(this->d);
-	if (this->d > FLOAT_MAX_D || this->d < -FLOAT_MAX_D)
+	if (this->d == INFD_N || this->d == INFD_P)
+		this->floatConvertible = true;
+	else if (this->d > FLOAT_MAX_D || this->d < FLOAT_MIN_D)
 		this->floatConvertible = false;
 }
 
