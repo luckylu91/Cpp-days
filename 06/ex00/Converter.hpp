@@ -29,14 +29,14 @@ private:
 	Converter & operator=(Converter const &);
 
 	typedef enum e_type_from {CHAR, INT, FLOAT, DOUBLE, UNKNOWN} t_type_from;
-	bool		intitialized;
-	bool		charConvertible;
-	bool		intConvertible;
-	bool		floatConvertible;
-	char 		c;
-	int 		i;
-	float 		f;
-	double 		d;
+	bool				intitialized;
+	bool				charConvertible;
+	bool				intConvertible;
+	bool				floatConvertible;
+	char 				c;
+	int 				i;
+	float 			f;
+	double 			d;
 	t_type_from	t;
 	void fromInt(std::string const & str);
 	void fromFloat(std::string const & str);

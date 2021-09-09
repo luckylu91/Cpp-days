@@ -17,12 +17,13 @@ void printContainer(T & cont)
 }
 
 template<typename T>
-void testFind(std::string const & containerTypeName, T & cont, int i)
+void testFind(std::string const & containerTypeName, T & container, int i)
 {
 	std::cout << "(" << containerTypeName << ") ";
-	printContainer(cont);
+	printContainer(container);
 	std::cout << ": contains " << i << " ? ";
-	std::cout << (easyfind(cont, i) ? "yes" : "no") << std::endl;
+	typename T::iterator it = easyfind(container, i);
+	std::cout << (it != container.end() ? "yes" : "no") << std::endl;
 }
 
 int main()

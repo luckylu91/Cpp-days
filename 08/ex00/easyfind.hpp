@@ -1,12 +1,13 @@
 #pragma once
 
 template <typename T>
-bool easyfind(T & cont, int val)
+typename T::iterator easyfind(T & container, int val)
 {
-	for (typename T::const_iterator it = cont.begin(); it != cont.end(); ++it)
+	typename T::iterator it = container.begin();
+	for (; it != container.end(); ++it)
 	{
 		if (*it == val)
-			return true;
+			break;
 	}
-	return false;
+	return it;
 }

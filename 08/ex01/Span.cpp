@@ -29,17 +29,21 @@ Span::Span(unsigned int n) : _n(n), _len(0)
 
 void Span::_copy(Span const & other)
 {
-	if (this->_content)
-		delete this->_content;
 	this->_n = other._n;
 	this->_len = other._len;
 	this->_content = (other._n > 0) ? new int[other._n] : NULL;
+	for (unsigned int i = 0; i < this->_len; i++)
+	{
+		this->_content[i] = other._content[i];
+	}
 }
 
 Span::Span(Span const & other) { _copy(other); }
 
 Span & Span::operator=(Span const & other)
 {
+	if (this->_content)
+		delete this->_content;
 	_copy(other);
 	return *this;
 }
@@ -66,9 +70,9 @@ void Span::addNumber(int i) throw(Span::ContainerIsFullException)
 	this->_content[this->_len++] = i;
 }
 
-int Span::shortestSpan() const throw(Span::NotEnoughElementsException)
+unsigned int Span::shortestSpan() const throw(Span::NotEnoughElementsException)
 {
-	int				sp;
+	unsigned int	sp;
 	unsigned int	shortest;
 
 	if (this->_len < 2)
@@ -78,20 +82,20 @@ int Span::shortestSpan() const throw(Span::NotEnoughElementsException)
 	{
 		for (unsigned int j = i + 1; j < this->_len; j++)
 		{
-			sp = abs(this->_content[i] - this->_content[j]);
+			sp = static_cast<unsigned int>( abs(this->_content[i] - this->_content[j]) );
 			if (sp < shortest)
 				shortest = sp;
 		}
 	}
+	return shortest;
 }
 
 int Span::longestSpan() const throw(Span::NotEnoughElementsException)
 {
 	if (this->_len < 2)
 		throw Span::NotEnoughElementsException();
-	int *content_end = this->_content + sizeof(this->_content) / sizeof(*this->_content);
-	int min = *std::min_element(this->_content, content_end);
-	int max = *std::max_element(this->_content, content_end);
+	int min = *std::min_element(this->_content, this->_content + this->_len);
+	int max = *std::max_element(this->_content, this->_content + this->_len);
 	return (max - min);
 }
 

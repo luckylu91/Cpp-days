@@ -28,7 +28,7 @@ public:
 
 	Array(unsigned int n) : _size(n)
 	{
-		this->_array = new T[n];
+		this->_array = new T[n]();
 	}
 
 	Array(Array<T> const & other) : _size(other._size)
